@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskly App", "Taskly App\Taskly App.csproj", "{AAFB5B26-2695-45B9-90D2-38DBF33765EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAFB5B26-2695-45B9-90D2-38DBF33765EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAFB5B26-2695-45B9-90D2-38DBF33765EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAFB5B26-2695-45B9-90D2-38DBF33765EA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AAFB5B26-2695-45B9-90D2-38DBF33765EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAFB5B26-2695-45B9-90D2-38DBF33765EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAFB5B26-2695-45B9-90D2-38DBF33765EA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77EF85D6-6149-4A4E-A5F8-4226D4118694}
+	EndGlobalSection
+EndGlobal
