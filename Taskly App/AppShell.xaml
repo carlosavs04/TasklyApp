@@ -10,23 +10,32 @@
     xmlns:settings="clr-namespace:Taskly_App.Views.Tabs.Settings"
     Shell.FlyoutBehavior="Disabled"
     Title="Taskly_App">
+<Shell.Resources>
+    <Style TargetType="TabBar">
+        <Setter Property="Shell.TabBarBackgroundColor" Value="Black"/>
+        <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+        <Setter Property="Shell.TabBarUnselectedColor" Value="White"/>
+    </Style>
+</Shell.Resources>
     <TabBar>
+        <ShellContent
+            Title="My Tasks"
+            Icon="my_tasks_tab.png"
+            ContentTemplate="{DataTemplate mytasks:MyTasksPage}" 
+            Route="MyTasks" 
+            />
 
- <ShellContent
-    Title="My Tasks"
-    ContentTemplate="{DataTemplate mytasks:MyTasksPage}" 
-    Route="MyTasks" />
+        <ShellContent
+            Title="All Tasks"
+            Icon="all_tasks_tab.png"
+            ContentTemplate="{DataTemplate alltasks:AllTasksPage}"
+            Route="AllTasks" />
 
-    <ShellContent
-    Title="All Tasks"
-    ContentTemplate="{DataTemplate alltasks:AllTasksPage}"
-    Route="AllTasks" />
-
-    <ShellContent
-    Title="Settings"
-    ContentTemplate="{DataTemplate settings:SettingsPage}"
-    Route="Settings" />
-
+        <ShellContent
+            Title="Settings"
+            Icon="settings_tab.png"
+            ContentTemplate="{DataTemplate settings:SettingsPage}"
+            Route="Settings" />
     </TabBar>
-    
+
 </Shell>

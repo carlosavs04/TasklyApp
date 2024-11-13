@@ -12,6 +12,7 @@
                 TextColor="White"
                 FontSize="30"
                 HorizontalTextAlignment="Center"
+                
             />
             <Frame
                 BackgroundColor="Gray"
