@@ -4,12 +4,29 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Taskly_App"
+    xmlns:register="clr-namespace:Taskly_App.Views.Register"
+    xmlns:mytasks="clr-namespace:Taskly_App.Views.Tabs.MyTasks"
+    xmlns:alltasks="clr-namespace:Taskly_App.Views.Tabs.AllTasks"
+    xmlns:settings="clr-namespace:Taskly_App.Views.Tabs.Settings"
     Shell.FlyoutBehavior="Disabled"
     Title="Taskly_App">
+    <TabBar>
+
+ <ShellContent
+    Title="My Tasks"
+    ContentTemplate="{DataTemplate mytasks:MyTasksPage}" 
+    Route="MyTasks" />
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    Title="All Tasks"
+    ContentTemplate="{DataTemplate alltasks:AllTasksPage}"
+    Route="AllTasks" />
 
+    <ShellContent
+    Title="Settings"
+    ContentTemplate="{DataTemplate settings:SettingsPage}"
+    Route="Settings" />
+
+    </TabBar>
+    
 </Shell>
