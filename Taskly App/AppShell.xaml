@@ -11,6 +11,7 @@
     xmlns:newtask="clr-namespace:Taskly_App.Views.Tasks.New"
     xmlns:edittask="clr-namespace:Taskly_App.Views.Tasks.Edit"
     xmlns:listgroups="clr-namespace:Taskly_App.Views.ListGroups"
+    xmlns:newgroup="clr-namespace:Taskly_App.Views.NewGroup"
     Shell.FlyoutBehavior="Disabled"
     Title="Taskly_App">
 <Shell.Resources>
