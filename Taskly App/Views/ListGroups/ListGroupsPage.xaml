@@ -32,12 +32,16 @@
                                Text="{Binding Title}"
                                FontSize="16"
                                TextColor="White"
-                               FontAttributes="Bold" />
+                               FontAttributes="Bold" 
+                               Padding="0,0,0,15"
+                               />
                         <!-- Descripción del grupo -->
                         <Label Grid.Row="1" Grid.Column="0"
                                Text="{Binding Description}"
                                FontSize="14"
-                               TextColor="Gray" />
+                               TextColor="Gray" 
+                               Padding="0,0,0,15"
+                               />
                         <!-- Borde inferior -->
                         <BoxView Grid.Row="2" Grid.Column="0"
                                  HorizontalOptions="FillAndExpand"

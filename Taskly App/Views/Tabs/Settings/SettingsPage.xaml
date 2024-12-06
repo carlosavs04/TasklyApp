@@ -1,18 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Taskly_App.Views.Tabs.Settings.SettingsPage">
+             x:Class="Taskly_App.Views.Tabs.Settings.SettingsPage"
+             BackgroundColor="Black">
+
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
-            BackgroundColor="Black"
             Spacing="25">
+            
+            <!-- Título del menú -->
             <Label
-                Text="Settings"
+                Text="Menú"
                 TextColor="White"
                 FontSize="30"
                 HorizontalTextAlignment="Center"
-            />
+                Margin="0,20,0,20" />
+
+            <!-- Opción: Salir del grupo -->
+            <Grid Padding="0" ColumnDefinitions="*,Auto">
+                <Label Text="Salir del grupo"
+                       TextColor="White"
+                       FontSize="18"
+                       VerticalOptions="Center"
+                       Padding="0,0,0,15" 
+                        />
+                <BoxView HeightRequest="1"
+                         BackgroundColor="Gray"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="End"
+                         Grid.ColumnSpan="2" />
+            </Grid>
+
+            <!-- Opción: Cerrar sesión -->
+            <Grid Padding="0" ColumnDefinitions="*,Auto">
+                <Label Text="Cerrar sesión"
+                       TextColor="White"
+                       FontSize="18"
+                       VerticalOptions="Center"
+                       Padding="0,0,0,15"
+                        />
+                <BoxView HeightRequest="1"
+                         BackgroundColor="Gray"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="End"
+                         Grid.ColumnSpan="2" />
+            </Grid>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

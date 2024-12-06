@@ -28,7 +28,7 @@
             HeightRequest="50"
         />
         <Button
-            Text="Ingresar"
+            Text="Crear Grupo"
             BackgroundColor="White"
             TextColor="Black"
             FontSize="20"
