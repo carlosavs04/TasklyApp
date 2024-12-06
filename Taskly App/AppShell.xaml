@@ -8,6 +8,9 @@
     xmlns:mytasks="clr-namespace:Taskly_App.Views.Tabs.MyTasks"
     xmlns:alltasks="clr-namespace:Taskly_App.Views.Tabs.AllTasks"
     xmlns:settings="clr-namespace:Taskly_App.Views.Tabs.Settings"
+    xmlns:newtask="clr-namespace:Taskly_App.Views.Tasks.New"
+    xmlns:edittask="clr-namespace:Taskly_App.Views.Tasks.Edit"
+    xmlns:listgroups="clr-namespace:Taskly_App.Views.ListGroups"
     Shell.FlyoutBehavior="Disabled"
     Title="Taskly_App">
 <Shell.Resources>
