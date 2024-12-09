@@ -11,36 +11,43 @@
                 Text="Iniciar sesión"
                 TextColor="White"
                 FontSize="30"
-                HorizontalTextAlignment="Center"
-                
-            />
+                HorizontalTextAlignment="Center" />
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}" />
+            
             <Frame
                 BackgroundColor="Gray"
                 CornerRadius="10"
                 Padding="0">
-            <Entry
-                Placeholder="Email"
-                PlaceholderColor="White"
-                BackgroundColor="Gray"
-                TextColor="White"
-                FontSize="20"
-                HeightRequest="50"
-            />
+                <Entry
+                    Placeholder="Nombre de usuario o correo"
+                    PlaceholderColor="White"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    FontSize="20"
+                    HeightRequest="50"
+                    Text="{Binding UserOrEmail}"/>
             </Frame>
             <Frame
                 BackgroundColor="Gray"
                 CornerRadius="10"
                 Padding="0">
-            <Entry
-                Placeholder="Password"
-                PlaceholderColor="White"
-                BackgroundColor="Gray"
-                TextColor="White"
-                FontSize="20"
-                HeightRequest="50"
-            />
+                <Entry
+                    Placeholder="Password"
+                    PlaceholderColor="White"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    FontSize="20"
+                    HeightRequest="50"
+                    IsPassword="True"
+                    Text="{Binding Password}" />
             </Frame>
-                        <BoxView HeightRequest="40" Color="Black" />
+            <BoxView HeightRequest="40" Color="Black" />
+            <Label 
+                Text="{Binding ErrorMessage}" 
+                TextColor="Red" 
+                FontSize="16" />
             <Button
                 Text="Iniciar sesión"
                 BackgroundColor="White"
@@ -48,17 +55,15 @@
                 FontSize="20"
                 HeightRequest="50"
                 CornerRadius="25"
-                Clicked="OnLoginClicked"
-            />
+                Command="{Binding LoginCommand}"
+                IsEnabled="{Binding LoginCommand.CanExecute}" />
             <Button
                 Text="¿Olvidaste tu contraseña?"
                 BackgroundColor="Gray"
                 TextColor="White"
                 FontSize="20"
                 HeightRequest="50"
-                CornerRadius="25"
-
-            />
+                CornerRadius="25" />
             <Button
                 Text="Crear una cuenta"
                 BackgroundColor="Black"
@@ -68,7 +73,6 @@
                 BorderColor="White"
                 BorderWidth="1"
                 Clicked="OnRegisterClicked"
-                CornerRadius="25"
-            />
+                CornerRadius="25" />
         </VerticalStackLayout>
 </ContentPage>

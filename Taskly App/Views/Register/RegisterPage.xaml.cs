@@ -1,17 +1,21 @@
+using Taskly_App.Helpers;
+using Taskly_App.ViewModels;
 using Taskly_App.Views.JoinGroup;
 
 namespace Taskly_App.Views.Register
 {
     public partial class RegisterPage : ContentPage
     {
-        public RegisterPage()
+        private readonly IServiceProvider _serviceProvider;
+        private RegisterViewModel _viewModel;
+
+        public RegisterPage(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-        }
-        
-        
-        private async void OnGoToJoinGroup(object sender, EventArgs e){
-        await Navigation.PushAsync(new JoinGroupPage());
+            _serviceProvider = serviceProvider;
+            var locator = serviceProvider.GetRequiredService<ViewModelLocator>();
+            _viewModel = locator.RegisterViewModel;
+            BindingContext = _viewModel;
         }
     }
 }

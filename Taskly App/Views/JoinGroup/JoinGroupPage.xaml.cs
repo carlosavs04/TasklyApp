@@ -11,7 +11,7 @@ namespace Taskly_App.Views.JoinGroup
         }
 
         private async void OnJoinGroup(object sender, EventArgs e){
-         await Navigation.PushAsync(new ListGroupsPage());
+         //await Navigation.PushAsync(new ListGroupsPage());
         }
 
         private async void OnGoToCreateGroup(object sender, EventArgs e){

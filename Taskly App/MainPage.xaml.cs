@@ -8,10 +8,6 @@ namespace Taskly_App
         {
             InitializeComponent();
         }
-
-        private async void OnRegisterClicked(object sender, EventArgs e){
-        await Navigation.PushAsync(new RegisterPage());
-        }
     }
 
 }

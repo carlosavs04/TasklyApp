@@ -4,9 +4,10 @@ namespace Taskly_App.Views.ListGroups
 {
     public partial class ListGroupsPage : ContentPage
     {
+        private readonly IServiceProvider _serviceProvider;
         public ObservableCollection<Group> Groups { get; set; }
 
-        public ListGroupsPage()
+        public ListGroupsPage(IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
@@ -19,6 +20,7 @@ namespace Taskly_App.Views.ListGroups
             };
 
             BindingContext = this;
+            _serviceProvider = serviceProvider;
         }
     }
 
