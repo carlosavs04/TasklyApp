@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Taskly_App.Views.Tasks.Edit.EditTaskPage"
+             BackgroundColor="Black">
+    <!-- Contenedor desplazable -->
+    <ScrollView>
+        <!-- Contenedor principal -->
+        <VerticalStackLayout
+            Padding="10,20,10,10"
+            BackgroundColor="Black"
+            Spacing="20">
+
+            <!-- Título -->
+            <Label
+                Text="Tarea"
+                TextColor="White"
+                FontSize="25"
+                HorizontalTextAlignment="Center" />
+
+            <!-- Input: Nombre de la Tarea -->
+            <VerticalStackLayout Spacing="5">
+                <Entry
+                    Placeholder="Nombre de la tarea"
+                    PlaceholderColor="White"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    FontSize="20"
+                    HeightRequest="50" />
+            </VerticalStackLayout>
+
+            <!-- Input: Descripción de la Tarea -->
+            <VerticalStackLayout Spacing="5">
+                <Editor
+                    Placeholder="Descripción"
+                    PlaceholderColor="White"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    FontSize="20"
+                    HeightRequest="100"
+                    VerticalOptions="Start"
+                    HorizontalOptions="FillAndExpand" />
+            </VerticalStackLayout>
+
+            <!-- Input: Fecha esperada -->
+            <VerticalStackLayout Spacing="5">
+                <Label
+                    Text="Fecha de entrega"
+                    TextColor="White"
+                    FontSize="20"
+                    HorizontalTextAlignment="Start" />
+                <DatePicker
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    FontSize="20"
+                    HeightRequest="50" />
+            </VerticalStackLayout>
+
+            <!-- Sección: Asignar Tarea -->
+            <VerticalStackLayout Spacing="10">
+                <Label
+                    Text="Asignar Tarea"
+                    TextColor="White"
+                    FontSize="25"
+                    HorizontalTextAlignment="Center" />
+
+                <!-- Lista personalizada para asignar tarea -->
+                <CollectionView
+                    ItemsSource="{Binding Encargados}"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding EncargadoSeleccionado, Mode=TwoWay}"
+                    HeightRequest="180">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame
+                                Padding="10"
+                                CornerRadius="10"
+                                HasShadow="False"
+                                BackgroundColor="Black"
+                                BorderColor="Transparent">
+                                <Frame.Triggers>
+                                    <!-- Cambiar el borde cuando el elemento esté seleccionado -->
+                                    <DataTrigger TargetType="Frame" Binding="{Binding ., Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=SelectedItem}" Value="{Binding}">
+                                        <Setter Property="BorderColor" Value="White" />
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                                <HorizontalStackLayout Spacing="10">
+                                    <Image
+                                        Source="{Binding Icono}"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        Aspect="AspectFit" />
+                                    <Label
+                                        Text="{Binding Nombre}"
+                                        TextColor="White"
+                                        FontSize="20"
+                                        VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <!-- Botón: Crear Tarea -->
+            <Button
+                Text="Actualizar Tarea"
+                BackgroundColor="White"
+                TextColor="Black"
+                FontSize="20"
+                HeightRequest="50"
+                CornerRadius="25"
+                Clicked="OnActualizarTareaClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

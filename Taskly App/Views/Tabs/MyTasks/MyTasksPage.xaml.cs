@@ -1,5 +1,7 @@
 using Taskly_App.Views.Tabs.MyTasks;
 using System.Collections.ObjectModel;
+using Taskly_App.Views.Tasks.New;
+using Taskly_App.Views.Tasks.Edit;
 
 namespace Taskly_App.Views.Tabs.MyTasks
 {
@@ -28,6 +30,26 @@ namespace Taskly_App.Views.Tabs.MyTasks
             // Establecer el contexto de datos para la vista
             BindingContext = this;
         }
+
+            private async void OnAgregarTareaClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewTaskPage());
+        }
+        private async void OnTaskSelected(object sender, SelectionChangedEventArgs e)
+{
+    // Obtener la tarea seleccionada
+    var tareaSeleccionada = e.CurrentSelection.FirstOrDefault() as Tarea;
+
+    if (tareaSeleccionada != null)
+    {
+        // Navegar a la nueva página pasando la tarea seleccionada
+        await Navigation.PushAsync(new EditTaskPage());
+        
+        // Limpiar la selección para que pueda seleccionarse nuevamente
+        ((CollectionView)sender).SelectedItem = null;
+    }
+}
+
     }
 
     // Clase que representa una tarea
@@ -37,4 +59,8 @@ namespace Taskly_App.Views.Tabs.MyTasks
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
     }
+
+
+
+    
 }
