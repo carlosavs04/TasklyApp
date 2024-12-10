@@ -30,9 +30,5 @@ namespace Taskly_App.Models
 
         [ForeignKey("OwnerId")]
         public User? Owner { get; set; }
-
-        public ICollection<UserTeam> UserTeams { get; set; } = new List<UserTeam>();
-
-        public ICollection<Note> Notes { get; set; } = new List<Note>();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Taskly_App.Models;
 using Taskly_App.Models.Config;
 using Taskly_App.Models.Requests;
 
@@ -45,19 +46,14 @@ namespace Taskly_App.Services
             return await _apiService.DeleteAsync<object>("auth/logout", true);
         }
 
-        public async Task<ApiResponse<object>?> Profile()
+        public async Task<ApiResponse<List<Team>>?> GetTeamsByUser()
         {
-            return await _apiService.GetAsync<object>("auth/user", true);
+            return await _apiService.GetAsync<List<Team>>("teams", true);
         }
 
         public async Task<ApiResponse<object>?> UsersList()
         {
             return await _apiService.GetAsync<object>("users", true);
-        }
-
-        public async Task<ApiResponse<object>?> UserById(int id)
-        {
-            return await _apiService.GetAsync<object>($"users/{id}", true);
         }
     }
 }

@@ -5,7 +5,6 @@
              BackgroundColor="Black">
 
     <VerticalStackLayout Padding="10,50,10,10" Spacing="25">
-        <!-- Etiqueta centrada que diga "Grupos" -->
         <Label Text="Grupos"
                HorizontalOptions="Center"
                VerticalOptions="Start"
@@ -13,36 +12,33 @@
                TextColor="White"
                FontAttributes="Bold"/>
 
-        <!-- Etiqueta alineada a la izquierda que diga "Mis Grupos" -->
-        <Label Text="Mis Grupos"
+        <Label Text="Mis grupos"
                HorizontalOptions="Start"
                FontSize="18"
                TextColor="White"
                Margin="0,20,0,10"
                FontAttributes="Bold"/>
 
-        <!-- Lista de grupos -->
-        <CollectionView ItemsSource="{Binding Groups}" BackgroundColor="Black">
+        <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" />
+
+        <CollectionView ItemsSource="{Binding Teams}" BackgroundColor="Black">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="10,5" 
                           RowDefinitions="Auto,Auto,Auto" >
-                        <!-- Título del grupo -->
                         <Label Grid.Row="0" Grid.Column="0"
-                               Text="{Binding Title}"
+                               Text="{Binding Name}"
                                FontSize="16"
                                TextColor="White"
                                FontAttributes="Bold" 
                                Padding="0,0,0,15"
                                />
-                        <!-- Descripción del grupo -->
                         <Label Grid.Row="1" Grid.Column="0"
                                Text="{Binding Description}"
                                FontSize="14"
                                TextColor="Gray" 
                                Padding="0,0,0,15"
                                />
-                        <!-- Borde inferior -->
                         <BoxView Grid.Row="2" Grid.Column="0"
                                  HorizontalOptions="FillAndExpand"
                                  VerticalOptions="End"
@@ -52,5 +48,9 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Label 
+            Text="{Binding ErrorMessage}" 
+            TextColor="Red" 
+            FontSize="16" />
     </VerticalStackLayout>
 </ContentPage>
