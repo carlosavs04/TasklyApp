@@ -45,8 +45,9 @@ namespace Taskly_App.Services
 
         public async Task<ApiResponse<object>?> Logout()
         {
+            var response = await _apiService.DeleteAsync<object>("auth/logout", true);
             _configurationService.SetAuthToken("auth_token");
-            return await _apiService.DeleteAsync<object>("auth/logout", true);
+            return response;
         }
 
         public async Task<ApiResponse<List<Team>>?> GetTeamsByUser()

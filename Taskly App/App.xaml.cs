@@ -1,4 +1,5 @@
-﻿using Taskly_App.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Taskly_App.Services;
 using Taskly_App.Views.ListGroups;
 using Taskly_App.Views.Login;
 namespace Taskly_App
@@ -11,14 +12,23 @@ namespace Taskly_App
             InitializeComponent();
 
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            InitializeMainPage();
+        }
 
-            var configService = serviceProvider.GetRequiredService<ConfigurationService>();
+        private void InitializeMainPage()
+        {
+            var configService = _serviceProvider.GetRequiredService<ConfigurationService>();
             var token = configService.GetAuthToken();
 
             if (string.IsNullOrEmpty(token) || token == "auth_token")
                 MainPage = new NavigationPage(new LoginPage(_serviceProvider));
             else
                 MainPage = new NavigationPage(new ListGroupsPage(_serviceProvider));
+        }
+
+        public void RestartApp()
+        {
+            InitializeMainPage();
         }
     }
 }

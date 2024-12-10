@@ -30,5 +30,14 @@ namespace Taskly_App.Views.ListGroups
         {
              await Navigation.PushAsync(new JoinGroupPage(_serviceProvider));
         }
+
+        private async void NavigateToHome(object sender, TappedEventArgs args)
+        {
+            if (args.Parameter is Models.Team selected)
+            {
+                _viewModel.OnSelectTeamCommand.Execute(selected);
+                await Navigation.PushAsync(new AppShell(_serviceProvider));
+            }
+        }
     }
 }

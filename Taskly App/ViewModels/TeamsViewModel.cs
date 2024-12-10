@@ -14,14 +14,17 @@ namespace Taskly_App.ViewModels
     public class TeamsViewModel : BaseViewModel
     {
         private readonly ApiRouterService _routerService;
+        private readonly ConfigurationService _configurationService;
         private string _errorMessage = string.Empty;
         private bool _isBusy = false;
         public ObservableCollection<Team> _teams = new ObservableCollection<Team>();
 
-        public TeamsViewModel(ApiRouterService routerService)
+        public TeamsViewModel(ApiRouterService routerService, ConfigurationService configurationService)
         {
             _routerService = routerService;
+            _configurationService = configurationService;
             LoadTeamsCommand = new Command(async () => await LoadTeamsAsync());
+            OnSelectTeamCommand = new Command<Team>(OnSelectTeam);
         }
 
         public ObservableCollection<Team> Teams
@@ -43,6 +46,7 @@ namespace Taskly_App.ViewModels
         }
 
         public ICommand LoadTeamsCommand { get; }
+        public ICommand OnSelectTeamCommand { get; }
 
         private async Task LoadTeamsAsync()
         {
@@ -69,6 +73,25 @@ namespace Taskly_App.ViewModels
             catch (ApiException ex)
             {
                 ErrorMessage = ex.Message;
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        private void OnSelectTeam(Team selectedTeam)
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            ErrorMessage = string.Empty;
+
+            try
+            {
+                _configurationService.SetSelectedTeamId(selectedTeam.Id);
+                _configurationService.SetOwnerTeamId(selectedTeam.OwnerId);
             }
             finally
             {

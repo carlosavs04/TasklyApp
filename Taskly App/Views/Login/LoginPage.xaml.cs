@@ -25,12 +25,10 @@ namespace Taskly_App.Views.Login
             await Navigation.PushAsync(new RegisterPage(_serviceProvider));
         }
         private async void OnForgotPasswordClicked(object sender, EventArgs e)
-{
-    var forgotPasswordViewModel = new ForgotPasswordViewModel();
-    var forgotPasswordPage = new ForgotPasswordPage(forgotPasswordViewModel);
-    await Navigation.PushModalAsync(forgotPasswordPage);
-}
-
+        {
+            var forgotPasswordPage = new ForgotPasswordPage(_serviceProvider);
+            await Navigation.PushModalAsync(forgotPasswordPage);
+        }
     }
 
 }

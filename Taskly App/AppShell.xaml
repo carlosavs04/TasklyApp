@@ -22,24 +22,9 @@
     </Style>
 </Shell.Resources>
     <TabBar>
-        <ShellContent
-            Title="My Tasks"
-            Icon="my_tasks_tab.png"
-            ContentTemplate="{DataTemplate mytasks:MyTasksPage}" 
-            Route="MyTasks" 
-            />
-
-        <ShellContent
-            Title="All Tasks"
-            Icon="all_tasks_tab.png"
-            ContentTemplate="{DataTemplate alltasks:AllTasksPage}"
-            Route="AllTasks" />
-
-        <ShellContent
-            Title="Settings"
-            Icon="settings_tab.png"
-            ContentTemplate="{DataTemplate settings:SettingsPage}"
-            Route="Settings" />
+        <Tab Title="Mis tareas" Icon="my_tasks_tab.png" x:Name="myTasksTab" />
+        <Tab Title="Tareas" Icon="all_tasks_tab.png" x:Name="allTasksTab" />
+        <Tab Title="Configuración" Icon="settings_tab.png" x:Name="settingsTab" />
     </TabBar>
 
 </Shell>

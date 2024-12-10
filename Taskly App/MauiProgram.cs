@@ -8,6 +8,9 @@ using Taskly_App.ViewModels;
 using Taskly_App.Views.ListGroups;
 using Taskly_App.Views.Login;
 using Taskly_App.Views.Register;
+using Taskly_App.Views.Tabs.AllTasks;
+using Taskly_App.Views.Tabs.MyTasks;
+using Taskly_App.Views.Tabs.Settings;
 
 namespace Taskly_App
 {
@@ -49,10 +52,15 @@ namespace Taskly_App
             builder.Services.AddTransient<TeamsViewModel>();
             builder.Services.AddTransient<AddTeamViewModel>();
             builder.Services.AddTransient<JoinTeamViewModel>();
+            builder.Services.AddTransient<SettingsViewModel>();
+            builder.Services.AddTransient<ForgotPasswordViewModel>();
 
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<ListGroupsPage>();
+            builder.Services.AddTransient<AllTasksPage>();
+            builder.Services.AddTransient<MyTasksPage>();
+            builder.Services.AddTransient<SettingsPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
