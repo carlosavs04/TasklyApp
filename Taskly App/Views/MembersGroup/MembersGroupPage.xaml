@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Taskly_App.Views.MembersGroup.MembersGroupPage"
+             BackgroundColor="Black">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10,50,10,10" Spacing="15">
+
+            <!-- Título -->
+            <Label Text="Integrantes del Grupo"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,0,0,20"/>
+
+            <!-- Lista de integrantes -->
+            <CollectionView ItemsSource="{Binding Users}" BackgroundColor="Black">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Padding="10" Margin="0,0,0,5">
+                            <Label Text="{Binding Username}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                            <Label Text="{Binding Email}"
+                                   FontSize="14"
+                                   TextColor="LightGray"/>
+                            <!-- Borde inferior -->
+                            <BoxView Color="Gray"
+                                     HeightRequest="1"
+                                     HorizontalOptions="Fill"
+                                     VerticalOptions="End"
+                                     Margin="0,5,0,0" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

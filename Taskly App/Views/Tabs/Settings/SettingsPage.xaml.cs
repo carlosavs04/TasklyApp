@@ -2,6 +2,9 @@ using Taskly_App.Helpers;
 using Taskly_App.ViewModels;
 using Taskly_App.Views.ListGroups;
 using Taskly_App.Views.Tabs.Settings;
+using Taskly_App.Views.MembersGroup;
+using Taskly_App.Views.InfoGroup;
+using Taskly_App.Views.UpdatePassword;
 
 namespace Taskly_App.Views.Tabs.Settings
 {
@@ -26,6 +29,18 @@ namespace Taskly_App.Views.Tabs.Settings
                 var app = (App)Application.Current;
                 app.RestartApp();
             }
+        }
+                private async void MembersGroupClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MembersGroupPage());
+        }
+        private void InfoGroupClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new InfoGroupPage());
+        }
+        private void UpdatePasswordClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new UpdatePasswordPage());
         }
     }
 }

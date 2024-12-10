@@ -32,10 +32,7 @@ namespace Taskly_App.Views.Tabs.MyTasks
             BindingContext = this;
         }
 
-            private async void OnAgregarTareaClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new NewTaskPage());
-        }
+
         private async void OnDetailSelected(object sender, SelectionChangedEventArgs e)
 {
     // Obtener la tarea seleccionada
@@ -49,21 +46,6 @@ namespace Taskly_App.Views.Tabs.MyTasks
             BindingContext = tareaSeleccionada
         });
 }
-}
-private async void OnEditTaskClicked(object sender, EventArgs e)
-{
-    // Obtener la tarea asociada al botón
-    var button = sender as Button;
-    var tarea = button?.BindingContext as Tarea;
-
-    if (tarea != null)
-    {
-        // Navegar a la página de edición con la tarea seleccionada
-        await Navigation.PushAsync(new EditTaskPage
-        {
-            BindingContext = tarea // Pasar la tarea seleccionada como BindingContext
-        });
-    }
 }
 
     }

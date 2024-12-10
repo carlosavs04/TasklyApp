@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Taskly_App.Views.Tabs.AllTasks.AllTasksPage"
-             xmlns:local="clr-namespace:Taskly_App.Converters">
+             xmlns:local="clr-namespace:Taskly_App.Converters"
+             BackgroundColor="Black">
 
     <!-- Declaramos el convertidor como un recurso -->
     <ContentPage.Resources>
@@ -11,50 +12,75 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="10,50,10,10"
-            BackgroundColor="Black"
-            Spacing="25">
+    <AbsoluteLayout>
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="10,50,10,10"
+                Spacing="25">
 
-            <!-- Títulos -->
-            <Label
-                Text="Todas las tareas"
-                TextColor="White"
-                FontSize="30"
-                HorizontalTextAlignment="Center"
-            />
+                <!-- Títulos -->
+                <Label
+                    Text="Todas las tareas"
+                    TextColor="White"
+                    FontSize="30"
+                    HorizontalTextAlignment="Center"
+                />
 
-            <!-- Lista de tareas -->
-            <CollectionView ItemsSource="{Binding Tareas}" BackgroundColor="Black">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame BackgroundColor="Black" Padding="10" Margin="0" CornerRadius="10" BorderColor="Transparent">
-                            <StackLayout>
-                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center" Padding="0,0,0,20">
-                                    <!-- Eliminar el CheckBox y agregar lógica de subrayado -->
-                                    <VerticalStackLayout VerticalOptions="Center">
-                                        <!-- Titulo con subrayado si la tarea está completada -->
-                                        <Label Text="{Binding Titulo}"
-                                               TextColor="White"
-                                               FontSize="18"
-                                               HorizontalTextAlignment="Start"
-                                               TextDecorations="{Binding IsCompleted, Converter={StaticResource BoolToTextDecorationConverter}}"/>
+                <!-- Lista de tareas -->
+                <CollectionView ItemsSource="{Binding Tareas}" 
+                    BackgroundColor="Black"
+                    SelectionMode="Single" 
+                    SelectionChanged="OnDetailSelected">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="Black" Padding="10" Margin="0" CornerRadius="10" BorderColor="Transparent">
+                                <StackLayout>
+                                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center" Padding="0,0,0,20">
+                                        <!-- Información de la tarea -->
+                                        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                            <Label Text="{Binding Titulo}"
+                                                   TextColor="White"
+                                                   FontSize="18"
+                                                   HorizontalTextAlignment="Start"
+                                                   TextDecorations="{Binding IsCompleted, Converter={StaticResource BoolToTextDecorationConverter}}"/>
 
-                                        <Label Text="{Binding Descripcion}" 
-                                               TextColor="Gray" 
-                                               FontSize="14" 
-                                               HorizontalTextAlignment="Start" />
-                                    </VerticalStackLayout>
-                                </HorizontalStackLayout>
-                                <BoxView Color="Gray"
-                                         HeightRequest="2"
-                                         HorizontalOptions="Fill"/>
-                            </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </VerticalStackLayout>
-    </ScrollView>
+                                            <Label Text="{Binding Descripcion}" 
+                                                   TextColor="Gray" 
+                                                   FontSize="14" 
+                                                   HorizontalTextAlignment="Start" />
+                                        </VerticalStackLayout>
+
+                                        <!-- Botón de edición -->
+                                        <Button
+                                            Text="✏️"
+                                            FontSize="16"
+                                            TextColor="White"
+                                            BackgroundColor="Transparent"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Center"
+                                            Clicked="OnEditTaskClicked" />
+                                    </HorizontalStackLayout>
+                                    <BoxView Color="Gray"
+                                             HeightRequest="2"
+                                             HorizontalOptions="Fill"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Botón flotante -->
+        <Button
+            Text="+ Agregar Tarea"
+            BackgroundColor="Gray"
+            TextColor="White"
+            CornerRadius="25"
+            HeightRequest="50"
+            WidthRequest="180"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            AbsoluteLayout.LayoutBounds="0.9, 0.95, AutoSize, AutoSize"
+            Clicked="OnAgregarTareaClicked" />
+    </AbsoluteLayout>
 </ContentPage>

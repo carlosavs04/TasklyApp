@@ -1,4 +1,7 @@
 using System.Collections.ObjectModel;
+using Taskly_App.Views.Tasks.New;
+using Taskly_App.Views.Tasks.Edit;
+using Taskly_App.Views.Tasks.Detail;
 
 namespace Taskly_App.Views.Tabs.AllTasks
 {
@@ -24,6 +27,24 @@ namespace Taskly_App.Views.Tabs.AllTasks
             // Establecer el contexto de datos para la vista
             BindingContext = this;
         }
+
+            private async void OnAgregarTareaClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewTaskPage());
+        }
+private async void OnEditTaskClicked(object sender, EventArgs e)
+{
+        // Navegar a la página de edición con la tarea seleccionada
+        await Navigation.PushAsync(new EditTaskPage());
+    
+}
+        private async void OnDetailSelected(object sender, SelectionChangedEventArgs e)
+{
+        // Navegar a la nueva página pasando la tarea seleccionada
+        await Navigation.PushAsync(new DetailTaskPage());
+}
+
+
     }
 
     // Clase que representa una tarea
