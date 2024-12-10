@@ -2,6 +2,7 @@ using Taskly_App.Views.Tabs.MyTasks;
 using System.Collections.ObjectModel;
 using Taskly_App.Views.Tasks.New;
 using Taskly_App.Views.Tasks.Edit;
+using Taskly_App.Views.Tasks.Detail;
 
 namespace Taskly_App.Views.Tabs.MyTasks
 {
@@ -35,7 +36,7 @@ namespace Taskly_App.Views.Tabs.MyTasks
         {
             await Navigation.PushAsync(new NewTaskPage());
         }
-        private async void OnTaskSelected(object sender, SelectionChangedEventArgs e)
+        private async void OnDetailSelected(object sender, SelectionChangedEventArgs e)
 {
     // Obtener la tarea seleccionada
     var tareaSeleccionada = e.CurrentSelection.FirstOrDefault() as Tarea;
@@ -43,10 +44,25 @@ namespace Taskly_App.Views.Tabs.MyTasks
     if (tareaSeleccionada != null)
     {
         // Navegar a la nueva página pasando la tarea seleccionada
-        await Navigation.PushAsync(new EditTaskPage());
-        
-        // Limpiar la selección para que pueda seleccionarse nuevamente
-        ((CollectionView)sender).SelectedItem = null;
+        await Navigation.PushAsync(new DetailTaskPage
+        {
+            BindingContext = tareaSeleccionada
+        });
+}
+}
+private async void OnEditTaskClicked(object sender, EventArgs e)
+{
+    // Obtener la tarea asociada al botón
+    var button = sender as Button;
+    var tarea = button?.BindingContext as Tarea;
+
+    if (tarea != null)
+    {
+        // Navegar a la página de edición con la tarea seleccionada
+        await Navigation.PushAsync(new EditTaskPage
+        {
+            BindingContext = tarea // Pasar la tarea seleccionada como BindingContext
+        });
     }
 }
 

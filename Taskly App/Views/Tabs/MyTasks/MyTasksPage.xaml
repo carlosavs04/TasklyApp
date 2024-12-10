@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Taskly_App.Converters"
              x:Class="Taskly_App.Views.Tabs.MyTasks.MyTasksPage"
              BackgroundColor="Black">
+
+    <!-- Registro de recursos -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:TruncateTextConverter x:Key="TruncateTextConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <!-- Contenedor principal -->
     <AbsoluteLayout>
@@ -17,41 +25,49 @@
                     Text="Tareas"
                     TextColor="White"
                     FontSize="30"
-                    HorizontalTextAlignment="Center"
-                />
+                    HorizontalTextAlignment="Center" />
                 <Label
                     Text="Mis tareas"
                     TextColor="White"
                     FontSize="20"
-                    HorizontalTextAlignment="Start"
-                />
+                    HorizontalTextAlignment="Start" />
 
                 <!-- Lista de tareas -->
-             <CollectionView 
-    ItemsSource="{Binding Tareas}" 
-    BackgroundColor="Black" 
-    SelectionMode="Single"
-    SelectionChanged="OnTaskSelected">
-    <CollectionView.ItemTemplate>
-        <DataTemplate>
-            <Frame BackgroundColor="Black" Padding="10" Margin="0" CornerRadius="10" BorderColor="Transparent">
-                <StackLayout>
-                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center" Padding="0,0,0,20">
-                        <CheckBox IsChecked="{Binding IsChecked}" VerticalOptions="Center" />
-                        <VerticalStackLayout VerticalOptions="Center">
-                            <Label Text="{Binding Titulo}" TextColor="White" FontSize="18" HorizontalTextAlignment="Start" />
-                            <Label Text="{Binding Descripcion}" TextColor="Gray" FontSize="14" HorizontalTextAlignment="Start" />
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                    <BoxView Color="Gray"
-                             HeightRequest="2"
-                             HorizontalOptions="Fill"/>
-                </StackLayout>
-            </Frame>
-        </DataTemplate>
-    </CollectionView.ItemTemplate>
-</CollectionView>
-
+                <CollectionView 
+                    ItemsSource="{Binding Tareas}" 
+                    BackgroundColor="Black" 
+                    SelectionMode="Single"
+                    SelectionChanged="OnDetailSelected">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="Black" Padding="10" Margin="0" CornerRadius="10" BorderColor="Transparent">
+                                <StackLayout>
+                                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center" Padding="0,0,0,20">
+                                        <CheckBox IsChecked="{Binding IsChecked}" VerticalOptions="Center" />
+                                        <VerticalStackLayout VerticalOptions="Center">
+                                            <Label Text="{Binding Titulo,
+                                                Converter={StaticResource TruncateTextConverter}}}" TextColor="White" FontSize="18" HorizontalTextAlignment="Start" />
+                                            <Label Text="{Binding Descripcion, Converter={StaticResource TruncateTextConverter}}" 
+                                                   TextColor="Gray" 
+                                                   FontSize="14" 
+                                                   HorizontalTextAlignment="Start" />
+                                        </VerticalStackLayout>
+                                        <Button
+                                            Text="✏️"
+                                            FontSize="16"
+                                            TextColor="White"
+                                            BackgroundColor="Transparent"
+                                            VerticalOptions="Center"
+                                            Clicked="OnEditTaskClicked" />
+                                    </HorizontalStackLayout>
+                                    <BoxView Color="Gray"
+                                             HeightRequest="2"
+                                             HorizontalOptions="Fill"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
 
