@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using Taskly_App.Helpers;
 using Taskly_App.ViewModels;
+using Taskly_App.Views.JoinGroup;
 using Taskly_App.Views.NewGroup;
 using Taskly_App.Views.Tabs.MyTasks;
 
@@ -25,13 +26,9 @@ namespace Taskly_App.Views.ListGroups
             base.OnAppearing();
             _viewModel.LoadTeamsCommand.Execute(null);
         }
-          private async void OnAddGroupButtonClicked(object sender, EventArgs e)
+        private async void OnAddGroupButtonClicked(object sender, EventArgs e)
         {
-            // Navegar a la nueva página
-             await Navigation.PushAsync(new NewGroupPage());
-            //await Navigation.PushAsync(new MyTasksPage());
-
-
+             await Navigation.PushAsync(new JoinGroupPage(_serviceProvider));
         }
     }
 }

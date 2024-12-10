@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace Taskly_App.Models.Requests
 {
-    public class EmailRequest
+    public class CodeRequest
     {
-        [JsonPropertyName("email")]
+        [JsonPropertyName("code")]
         [Required]
-        [EmailAddress]
-        public required string Email { get; set; }
+        public required string Code { get; set; }
     }
 }

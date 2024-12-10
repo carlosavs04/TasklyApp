@@ -22,22 +22,25 @@ namespace Taskly_App.Services
 
         public async Task<ApiResponse<object>?> Register(RegisterRequest request)
         {
-            return await _apiService.PostAsync<object, object>("auth/register", request);
+            return await _apiService.PostAsync<RegisterRequest, object>("auth/register", request);
         }
 
-        public async Task<ApiResponse<object>?> Login(LoginRequest request)
+        public async Task<ApiResponse<User>?> Login(LoginRequest request)
         {
-            var response = await _apiService.PostAsync<object, object>("auth/login", request);
+            var response = await _apiService.PostAsync<LoginRequest, User>("auth/login", request);
 
-            if (response != null && response.Token != null) 
+            if (response != null && response.Token != null && response.Data != null)
+            {
                 _configurationService.SetAuthToken(response.Token);
-
+                _configurationService.SetUserId(response.Data.Id);
+            }
+                
             return response;
         }
 
         public async Task<ApiResponse<object>?> RecoverPassword(EmailRequest request)
         {
-            return await _apiService.PostAsync<object, object>("auth/recover-password", request);
+            return await _apiService.PostAsync<EmailRequest, object>("auth/recover-password", request);
         }
 
         public async Task<ApiResponse<object>?> Logout()
@@ -49,6 +52,16 @@ namespace Taskly_App.Services
         public async Task<ApiResponse<List<Team>>?> GetTeamsByUser()
         {
             return await _apiService.GetAsync<List<Team>>("teams", true);
+        }
+
+        public async Task<ApiResponse<object>?> CreateTeam(TeamRequest request)
+        {
+            return await _apiService.PostAsync<TeamRequest, object>("teams/create", request, true);
+        }
+
+        public async Task<ApiResponse<object>?> JoinTeamByCode(CodeRequest request)
+        {
+            return await _apiService.PostAsync<CodeRequest, object>("teams/join", request, true);
         }
 
         public async Task<ApiResponse<object>?> UsersList()

@@ -10,36 +10,41 @@
             Text="Grupos"
             TextColor="White"
             FontSize="30"
-            HorizontalTextAlignment="Center"
-        />
+            HorizontalTextAlignment="Center" />
+        <ActivityIndicator
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}" />
         <Label
             Text="Unirse a un grupo existente"
             TextColor="White"
             FontSize="20"
-            HorizontalTextAlignment="Center"
-        />
-                    <Frame
-                BackgroundColor="Gray"
-                CornerRadius="10"
-                Padding="0">
-        <Entry
-            Placeholder="Ingrese el código del grupo"
-            PlaceholderColor="White"
+            HorizontalTextAlignment="Center" />
+        <Frame
             BackgroundColor="Gray"
-            TextColor="White"
-            FontSize="20"
-            HeightRequest="50"
-        />
+            CornerRadius="10"
+            Padding="0">
+            <Entry
+                Placeholder="Ingrese el código del grupo"
+                PlaceholderColor="White"
+                BackgroundColor="Gray"
+                TextColor="White"
+                FontSize="20"
+                HeightRequest="50"
+                Text="{Binding Code}"/>
         </Frame>
+        <Label 
+            Text="{Binding ErrorMessage}" 
+            TextColor="Red" 
+            FontSize="16" />
         <Button
             Text="Ingresar"
             BackgroundColor="White"
             TextColor="Black"
             FontSize="20"
             HeightRequest="50"
-            Clicked="OnJoinGroup"
             CornerRadius="25"
-        />
+            Command="{Binding JoinTeamCommand}"
+            IsEnabled="{Binding JoinTeamCommand.CanExecute}"/>
         <Button
             Text="Crear un grupo"
             BackgroundColor="Black"
@@ -49,8 +54,6 @@
             BorderColor="White"
             BorderWidth="1"
             Clicked="OnGoToCreateGroup"
-            CornerRadius="25"
-        />
-
+            CornerRadius="25" />
     </VerticalStackLayout>
 </ContentPage>

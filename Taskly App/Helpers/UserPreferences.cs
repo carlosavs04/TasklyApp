@@ -14,6 +14,10 @@ namespace Taskly_App.Helpers
             {
                 Preferences.Set(key, (string)(object)value);
             }
+            else if (value is int)
+            {
+                Preferences.Set(key, (int)(object)value);
+            }
             else if (value is bool)
             {
                 Preferences.Set(key, (bool)(object)value);
@@ -32,6 +36,10 @@ namespace Taskly_App.Helpers
             if (typeof(T) == typeof(string))
             {
                 return (T)(object)Preferences.Get(key, (string)(object)defaultValue);
+            }
+            else if (typeof(T) == typeof(int))
+            {
+                return (T)(object)Preferences.Get(key, (int)(object)defaultValue);
             }
             else if (typeof(T) == typeof(bool))
             {

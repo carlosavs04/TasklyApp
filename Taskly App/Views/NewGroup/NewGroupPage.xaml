@@ -5,35 +5,43 @@
              BackgroundColor="Black">
 
     <VerticalStackLayout Padding="10,50,10,10" Spacing="25">
-        <Label Text="Crear Grupo"
+        <Label Text="Crear grupo"
                HorizontalOptions="Center"
                VerticalOptions="Start"
                FontSize="24"
                TextColor="White"
                FontAttributes="Bold"/>
-                       <Entry
+        <ActivityIndicator
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}" />
+        <Entry
             Placeholder="Nombre del grupo"
             PlaceholderColor="White"
             BackgroundColor="Gray"
             TextColor="White"
             FontSize="20"
-            HeightRequest="50"
-        />
-                <Entry
+            HeightRequest="50" 
+            Text="{Binding Name}"/>
+        <Entry
             Placeholder="Descripción"
             PlaceholderColor="White"
             BackgroundColor="Gray"
             TextColor="White"
             FontSize="20"
             HeightRequest="50"
-        />
+            Text="{Binding Description}"/>
+        <Label 
+            Text="{Binding ErrorMessage}" 
+            TextColor="Red" 
+            FontSize="16" />
         <Button
-            Text="Crear Grupo"
+            Text="Crear grupo"
             BackgroundColor="White"
             TextColor="Black"
             FontSize="20"
             HeightRequest="50"
             CornerRadius="25"
-        />
+            Command="{Binding AddTeamCommand}"
+            IsEnabled="{Binding AddTeamCommand.CanExecute}"/>
     </VerticalStackLayout>
 </ContentPage>

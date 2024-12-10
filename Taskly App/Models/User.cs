@@ -23,15 +23,5 @@ namespace Taskly_App.Models
 
         [Required]
         public required string Password { get; set; }
-
-        public string? PasswordConfirmation { get; set; }
-
-        public ICollection<UserTeam> UserTeams { get; set; } = new List<UserTeam>();
-
-        public ICollection<Team> OwnedTeams { get; set; } = new List<Team>();
-
-        public ICollection<Note> CreatedNotes { get; set; } = new List<Note>();
-
-        public ICollection<Note> ResponsibleNotes { get; set; } = new List<Note>();
     }
 }

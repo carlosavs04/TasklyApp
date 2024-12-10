@@ -54,8 +54,7 @@
                 TextColor="Red" 
                 FontSize="16" />
         </VerticalStackLayout>
-
-        <!-- Floating Button -->
+        
         <Button
             x:Name="AddGroupButton"
             Text="+"

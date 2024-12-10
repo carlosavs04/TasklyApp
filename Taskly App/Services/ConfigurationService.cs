@@ -25,5 +25,35 @@ namespace Taskly_App.Services
         {
             return _preferences.GetPreference("auth_token", "auth_token");
         }
+
+        public void SetUserId(int userId)
+        {
+            _preferences.SetPreference("user_id", userId);
+        }
+
+        public int GetUserId()
+        {
+            return _preferences.GetPreference("user_id", 0);
+        }
+
+        public void SetSelectedTeamId(int teamId)
+        {
+            _preferences.SetPreference("selected_team_id", teamId);
+        }
+
+        public int GetSelectedTeamId()
+        {
+            return _preferences.GetPreference("selected_team_id", 0);
+        }
+
+        public void SetOwnerTeamId(int ownerId)
+        {
+            _preferences.SetPreference("owner_team_id", ownerId);
+        }
+
+        public int GetOwnerTeamId()
+        {
+            return _preferences.GetPreference("owner_team_id", 0);
+        }
     }
 }
