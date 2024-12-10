@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Taskly_App.Views.Tasks.Edit.EditTaskPage"
+             x:Class="Taskly_App.Views.Tasks.Detail.DetailTaskPage"
              BackgroundColor="Black">
     <!-- Contenedor desplazable -->
     <ScrollView>
@@ -13,7 +13,7 @@
 
             <!-- Título -->
             <Label
-                Text="Editar Tarea"
+                Text="Detalle de la Tarea"
                 TextColor="White"
                 FontSize="25"
                 HorizontalTextAlignment="Center" />
@@ -26,7 +26,8 @@
                     BackgroundColor="Gray"
                     TextColor="White"
                     FontSize="20"
-                    HeightRequest="50" />
+                    HeightRequest="50"
+                    IsEnabled="False" />
             </VerticalStackLayout>
 
             <!-- Input: Descripción de la Tarea -->
@@ -39,7 +40,8 @@
                     FontSize="20"
                     HeightRequest="100"
                     VerticalOptions="Start"
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand"
+                    IsReadOnly="True" />
             </VerticalStackLayout>
 
             <!-- Input: Fecha esperada -->
@@ -53,7 +55,8 @@
                     BackgroundColor="Gray"
                     TextColor="White"
                     FontSize="20"
-                    HeightRequest="50" />
+                    HeightRequest="50"
+                    IsEnabled="False" />
             </VerticalStackLayout>
 
             <!-- Sección: Asignar Tarea -->
@@ -69,7 +72,8 @@
                     ItemsSource="{Binding Encargados}"
                     SelectionMode="Single"
                     SelectedItem="{Binding EncargadoSeleccionado, Mode=TwoWay}"
-                    HeightRequest="180">
+                    HeightRequest="180"
+                    IsEnabled="False">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame
@@ -101,17 +105,6 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </VerticalStackLayout>
-
-            <!-- Botón: Crear Tarea -->
-            <Button
-                Text="Actualizar Tarea"
-                BackgroundColor="White"
-                TextColor="Black"
-                FontSize="20"
-                HeightRequest="50"
-                CornerRadius="25"
-                Clicked="OnActualizarTareaClicked" />
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

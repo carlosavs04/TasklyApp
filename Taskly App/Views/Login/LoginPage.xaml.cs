@@ -2,6 +2,7 @@ using Taskly_App.Helpers;
 using Taskly_App.ViewModels;
 using Taskly_App.Views.Login;
 using Taskly_App.Views.Register;
+using Taskly_App.Views.Login.ForgotPassword;
 
 namespace Taskly_App.Views.Login
 {
@@ -23,6 +24,13 @@ namespace Taskly_App.Views.Login
         {
             await Navigation.PushAsync(new RegisterPage(_serviceProvider));
         }
+        private async void OnForgotPasswordClicked(object sender, EventArgs e)
+{
+    var forgotPasswordViewModel = new ForgotPasswordViewModel();
+    var forgotPasswordPage = new ForgotPasswordPage(forgotPasswordViewModel);
+    await Navigation.PushModalAsync(forgotPasswordPage);
+}
+
     }
 
 }
