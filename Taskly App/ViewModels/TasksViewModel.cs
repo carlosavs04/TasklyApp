@@ -11,26 +11,27 @@ using Taskly_App.Services;
 
 namespace Taskly_App.ViewModels
 {
-    public class TeamsViewModel : BaseViewModel
+    public class TasksViewModel : BaseViewModel
     {
         private readonly ApiRouterService _routerService;
         private readonly ConfigurationService _configurationService;
         private string _errorMessage = string.Empty;
         private bool _isBusy = false;
-        private ObservableCollection<Team> _teams = new ObservableCollection<Team>();
+        private int _teamId;
+        private ObservableCollection<Note> _tasks = new ObservableCollection<Note>();
 
-        public TeamsViewModel(ApiRouterService routerService, ConfigurationService configurationService)
+        public TasksViewModel(ApiRouterService routerService, ConfigurationService configurationService)
         {
             _routerService = routerService;
             _configurationService = configurationService;
-            LoadTeamsCommand = new Command(async () => await LoadTeamsAsync());
-            OnSelectTeamCommand = new Command<Team>(OnSelectTeam);
+            _teamId = configurationService.GetSelectedTeamId();
+            LoadTasksCommand = new Command(async () => await LoadTasksAsync());
         }
 
-        public ObservableCollection<Team> Teams
+        public ObservableCollection<Note> Tasks
         {
-            get => _teams;
-            set => SetProperty(ref _teams, value);
+            get => _tasks;
+            set => SetProperty(ref _tasks, value);
         }
 
         public string ErrorMessage
@@ -45,10 +46,9 @@ namespace Taskly_App.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
 
-        public ICommand LoadTeamsCommand { get; }
-        public ICommand OnSelectTeamCommand { get; }
+        public ICommand LoadTasksCommand { get; }
 
-        private async Task LoadTeamsAsync()
+        private async Task LoadTasksAsync()
         {
             if (IsBusy)
                 return;
@@ -58,40 +58,33 @@ namespace Taskly_App.ViewModels
 
             try
             {
-                var response = await _routerService.GetTeamsByUser();
+                var response = await _routerService.GetTeamTasks(_teamId);
+
                 if (response != null && response.Status == "success" && response.Data != null && response.Data.Count > 0)
                 {
-                    var teamsList = response.Data as List<Team>;
-                    if (teamsList != null)
-                        Teams = new ObservableCollection<Team>(teamsList);
+                    var taskList = response.Data as List<Note>;
+                    if (taskList != null)
+                    {
+                        foreach (var task in taskList)
+                        {
+                            var responsibleUser = await _routerService.GetUser(task.ResponsibleId);
+                            if (responsibleUser != null && responsibleUser.Status == "success" && responsibleUser.Data != null)
+                            {
+                                task.ResponsibleUsername = $"Responsable: {responsibleUser.Data.Username}";
+                            }
+                        }
+                        Tasks = new ObservableCollection<Note>(taskList);
+                    }
+                        
                 }
                 else
                 {
-                    ErrorMessage = "Parece que aún no perteneces a ningún equipo";
+                    ErrorMessage = "No se encuentra ninguna tarea disponible.";
                 }
             }
             catch (ApiException ex)
             {
                 ErrorMessage = ex.Message;
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-
-        private void OnSelectTeam(Team selectedTeam)
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-            ErrorMessage = string.Empty;
-
-            try
-            {
-                _configurationService.SetSelectedTeamId(selectedTeam.Id);
-                _configurationService.SetOwnerTeamId(selectedTeam.OwnerId);
             }
             finally
             {

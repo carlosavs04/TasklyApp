@@ -20,5 +20,7 @@ namespace Taskly_App.Models
         [Required]
         [EmailAddress]
         public required string Email { get; set; }
+
+        public bool CanBeRemoved { get; set; }
     }
 }

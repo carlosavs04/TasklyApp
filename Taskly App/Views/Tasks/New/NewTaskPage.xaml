@@ -3,33 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Taskly_App.Views.Tasks.New.NewTaskPage"
              BackgroundColor="Black">
-    <!-- Contenedor desplazable -->
     <ScrollView>
-        <!-- Contenedor principal -->
         <VerticalStackLayout
             Padding="10,20,10,10"
             BackgroundColor="Black"
             Spacing="20">
 
-            <!-- Título -->
             <Label
-                Text="Crear Tarea"
+                Text="Crear tarea"
                 TextColor="White"
                 FontSize="25"
                 HorizontalTextAlignment="Center" />
 
-            <!-- Input: Nombre de la Tarea -->
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}" />
+
             <VerticalStackLayout Spacing="5">
                 <Entry
-                    Placeholder="Nombre de la tarea"
+                    Placeholder="Título de la tarea"
                     PlaceholderColor="White"
                     BackgroundColor="Gray"
                     TextColor="White"
                     FontSize="20"
-                    HeightRequest="50" />
+                    HeightRequest="50"
+                    Text="{Binding Title}"/>
             </VerticalStackLayout>
 
-            <!-- Input: Descripción de la Tarea -->
             <VerticalStackLayout Spacing="5">
                 <Editor
                     Placeholder="Descripción"
@@ -39,23 +39,22 @@
                     FontSize="20"
                     HeightRequest="100"
                     VerticalOptions="Start"
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand"
+                    Text="{Binding Body}"/>
             </VerticalStackLayout>
 
-            <!-- Sección: Asignar Tarea -->
             <VerticalStackLayout Spacing="10">
                 <Label
-                    Text="Asignar Tarea"
+                    Text="Asignar tarea"
                     TextColor="White"
                     FontSize="25"
                     HorizontalTextAlignment="Center" />
 
-                <!-- Lista personalizada para asignar tarea -->
                 <CollectionView
-                    ItemsSource="{Binding Encargados}"
+                    ItemsSource="{Binding Users}"
                     SelectionMode="Single"
-                    SelectedItem="{Binding EncargadoSeleccionado, Mode=TwoWay}"
-                    HeightRequest="180">
+                    HeightRequest="180"
+                    SelectedItem="{Binding SelectedUser, Mode=TwoWay}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame
@@ -65,19 +64,18 @@
                                 BackgroundColor="Black"
                                 BorderColor="Transparent">
                                 <Frame.Triggers>
-                                    <!-- Cambiar el borde cuando el elemento esté seleccionado -->
-                                    <DataTrigger TargetType="Frame" Binding="{Binding ., Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=SelectedItem}" Value="{Binding}">
+                                    <DataTrigger TargetType="Frame" Binding="{Binding ., Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=SelectedItem}" Value="{Binding .}">
                                         <Setter Property="BorderColor" Value="White" />
                                     </DataTrigger>
                                 </Frame.Triggers>
                                 <HorizontalStackLayout Spacing="10">
                                     <Image
-                                        Source="{Binding Icono}"
+                                        Source="icono_persona.png"
                                         WidthRequest="40"
                                         HeightRequest="40"
                                         Aspect="AspectFit" />
                                     <Label
-                                        Text="{Binding Nombre}"
+                                        Text="{Binding Username}"
                                         TextColor="White"
                                         FontSize="20"
                                         VerticalOptions="Center" />
@@ -88,16 +86,19 @@
                 </CollectionView>
             </VerticalStackLayout>
 
-            <!-- Botón: Crear Tarea -->
+            <Label 
+                Text="{Binding ErrorMessage}" 
+                TextColor="Red" 
+                FontSize="16" />
             <Button
-                Text="Crear Tarea"
+                Text="Añadir tarea"
                 BackgroundColor="White"
                 TextColor="Black"
                 FontSize="20"
                 HeightRequest="50"
-                CornerRadius="25"
-                Clicked="OnCrearTareaClicked" />
-
+                CornerRadius="25" 
+                Command="{Binding AddTaskCommand}"
+                IsEnabled="{Binding AddTaskCommand.CanExecute}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -5,9 +5,9 @@
              xmlns:local="clr-namespace:Taskly_App.Helpers.Converters"
              BackgroundColor="Black">
 
-    <!-- Declaramos el convertidor como un recurso -->
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local:TruncateTextConverter x:Key="TruncateTextConverter" />
             <local:BoolToTextDecorationConverter x:Key="BoolToTextDecorationConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -18,16 +18,15 @@
                 Padding="10,50,10,10"
                 Spacing="25">
 
-                <!-- Títulos -->
                 <Label
                     Text="Todas las tareas"
                     TextColor="White"
                     FontSize="30"
-                    HorizontalTextAlignment="Center"
-                />
+                    HorizontalTextAlignment="Center" />
 
-                <!-- Lista de tareas -->
-                <CollectionView ItemsSource="{Binding Tareas}" 
+                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" />
+
+                <CollectionView ItemsSource="{Binding Tasks}" 
                     BackgroundColor="Black"
                     SelectionMode="Single" 
                     SelectionChanged="OnDetailSelected">
@@ -36,21 +35,23 @@
                             <Frame BackgroundColor="Black" Padding="10" Margin="0" CornerRadius="10" BorderColor="Transparent">
                                 <StackLayout>
                                     <HorizontalStackLayout Spacing="10" VerticalOptions="Center" Padding="0,0,0,20">
-                                        <!-- Información de la tarea -->
                                         <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-                                            <Label Text="{Binding Titulo}"
+                                            <Label Text="{Binding Title, Converter={StaticResource TruncateTextConverter}}"
                                                    TextColor="White"
                                                    FontSize="18"
                                                    HorizontalTextAlignment="Start"
                                                    TextDecorations="{Binding IsCompleted, Converter={StaticResource BoolToTextDecorationConverter}}"/>
 
-                                            <Label Text="{Binding Descripcion}" 
+                                            <Label Text="{Binding Body, Converter={StaticResource TruncateTextConverter}}" 
+                                                   TextColor="Gray" 
+                                                   FontSize="14" 
+                                                   HorizontalTextAlignment="Start" />
+                                            <Label Text="{Binding ResponsibleUsername, Converter={StaticResource TruncateTextConverter}}" 
                                                    TextColor="Gray" 
                                                    FontSize="14" 
                                                    HorizontalTextAlignment="Start" />
                                         </VerticalStackLayout>
 
-                                        <!-- Botón de edición -->
                                         <Button
                                             Text="✏️"
                                             FontSize="16"
@@ -60,10 +61,9 @@
                                             VerticalOptions="Center"
                                             Clicked="OnEditTaskClicked" />
                                     </HorizontalStackLayout>
-                                 <BoxView Color="Gray"
-         HeightRequest="2"
-         HorizontalOptions="FillAndExpand"/>
-
+                                    <BoxView Color="Gray"
+                                             HeightRequest="2"
+                                             HorizontalOptions="FillAndExpand"/>
                                 </StackLayout>
                             </Frame>
                         </DataTemplate>
@@ -72,9 +72,8 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Botón flotante -->
         <Button
-            Text="+ Agregar Tarea"
+            Text="+ Agregar tarea"
             BackgroundColor="Gray"
             TextColor="White"
             CornerRadius="25"
@@ -82,6 +81,6 @@
             WidthRequest="180"
             AbsoluteLayout.LayoutFlags="PositionProportional"
             AbsoluteLayout.LayoutBounds="0.9, 0.95, AutoSize, AutoSize"
-            Clicked="OnAgregarTareaClicked" />
+            Clicked="OnAddTaskClicked" />
     </AbsoluteLayout>
 </ContentPage>

@@ -35,6 +35,7 @@ namespace Taskly_App.Models
 
         [Required]
         public int CreatedBy { get; set; }
+
         public bool InitialIsCompleted { get; set; }
 
         [ForeignKey("ResponsibleId")]
@@ -46,5 +47,8 @@ namespace Taskly_App.Models
         [ForeignKey("CreatedBy")]
         public User Creator { get; set; } = null!;
 
+        public string? ResponsibleUsername { get; set; }
+
+        public string? CreatorUsername { get; set; }
     }
 }

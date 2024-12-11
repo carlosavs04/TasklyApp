@@ -34,7 +34,7 @@ namespace Taskly_App.Services
                 _configurationService.SetAuthToken(response.Token);
                 _configurationService.SetUserId(response.Data.Id);
             }
-                
+
             return response;
         }
 
@@ -95,9 +95,44 @@ namespace Taskly_App.Services
             return await _apiService.PutAsyncWithoutBody<object>($"tasks/pending/{id}", true);
         }
 
-            public async Task<ApiResponse<object>?> UsersList()
+        public async Task<ApiResponse<List<User>>?> GetUsersByTeam(int id)
         {
-            return await _apiService.GetAsync<object>("users", true);
+            return await _apiService.GetAsync<List<User>>($"teams/users/{id}", true);
+        }
+
+        public async Task<ApiResponse<object>?> RemoveUserFromTeam(int teamId, int userId)
+        {
+            return await _apiService.DeleteAsync<object>($"teams/remove-user/{teamId}/{userId}", true);
+        }
+
+        public async Task<ApiResponse<List<Note>>?> GetTeamTasks(int id)
+        {
+            return await _apiService.GetAsync<List<Note>>($"tasks/team/all/{id}", true);
+        }
+
+        public async Task<ApiResponse<Note>?> GetTask(int id)
+        {
+            return await _apiService.GetAsync<Note>($"tasks/{id}", true);
+        }
+
+        public async Task<ApiResponse<object>?> CreateTask(NoteRequest request)
+        {
+            return await _apiService.PostAsync<NoteRequest, object>("tasks/create", request, true);
+        }
+
+        public async Task<ApiResponse<object>?> UpdateTask(int id, NoteRequest request)
+        {
+            return await _apiService.PutAsync<NoteRequest, object>($"tasks/{id}", request, true);
+        }
+
+        public async Task<ApiResponse<object>?> RemoveTask(int id)
+        {
+            return await _apiService.DeleteAsync<object>($"tasks/{id}", true);
+        }
+
+        public async Task<ApiResponse<User>?> GetUser(int id)
+        {
+            return await _apiService.GetAsync<User>($"users/{id}", true);
         }
     }
 }

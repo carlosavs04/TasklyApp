@@ -32,7 +32,7 @@ namespace Taskly_App.Views.Tabs.Settings
         }
         private async void MembersGroupClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MembersGroupPage());
+            await Navigation.PushAsync(new MembersGroupPage(_serviceProvider));
         }
         private void InfoGroupClicked(object sender, EventArgs e)
         {
