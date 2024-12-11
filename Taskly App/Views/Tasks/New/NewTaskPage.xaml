@@ -70,9 +70,9 @@
                                 </Frame.Triggers>
                                 <HorizontalStackLayout Spacing="10">
                                     <Image
-                                        Source="icono_persona.png"
-                                        WidthRequest="40"
-                                        HeightRequest="40"
+                                        Source="person.png"
+                                        WidthRequest="20"
+                                        HeightRequest="20"
                                         Aspect="AspectFit" />
                                     <Label
                                         Text="{Binding Username}"
