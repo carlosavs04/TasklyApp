@@ -54,6 +54,9 @@ namespace Taskly_App
             builder.Services.AddTransient<JoinTeamViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
             builder.Services.AddTransient<ForgotPasswordViewModel>();
+            builder.Services.AddTransient<TeamDetailsViewModel>();
+            builder.Services.AddTransient<UpdatePasswordViewModel>();
+            builder.Services.AddTransient<MyTasksViewModel>();
 
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<LoginPage>();

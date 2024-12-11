@@ -47,12 +47,19 @@ namespace Taskly_App.Services
             return await ProcessResponse<TResponse>(response);
         }
 
-        public async Task<ApiResponse<T>?> PutAsync<T>(string endpoint, T request, bool requiresAuth = false)
+        public async Task<ApiResponse<TResponse>?> PutAsync<TRequest, TResponse>(string endpoint, TRequest request, bool requiresAuth = false)
         {
             ConfigureAuthorizationHeader(requiresAuth);
             var json = JsonSerializer.Serialize(request);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _httpClient.PutAsync(endpoint, content);
+            return await ProcessResponse<TResponse>(response);
+        }
+
+        public async Task<ApiResponse<T>?> PutAsyncWithoutBody<T>(string endpoint, bool requiresAuth = false)
+        {
+            ConfigureAuthorizationHeader(requiresAuth);
+            var response = await _httpClient.PutAsync(endpoint, null);
             return await ProcessResponse<T>(response);
         }
 

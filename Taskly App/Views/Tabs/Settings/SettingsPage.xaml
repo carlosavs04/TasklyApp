@@ -36,6 +36,24 @@
             <Grid Padding="0" ColumnDefinitions="*,Auto">
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer 
+                        Tapped="MembersGroupClicked"
+                        NumberOfTapsRequired="1" />
+                </Grid.GestureRecognizers>
+                <Label Text="Miembros del equipo"
+                       TextColor="White"
+                       FontSize="18"
+                       VerticalOptions="Center"
+                       Padding="0,0,0,15" />
+                <BoxView HeightRequest="1"
+                       BackgroundColor="Gray"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="End"
+                       Grid.ColumnSpan="2" />
+            </Grid>
+
+            <Grid Padding="0" ColumnDefinitions="*,Auto">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer 
                         Tapped="NavigateToGroupList"
                         NumberOfTapsRequired="1" />
                 </Grid.GestureRecognizers>
@@ -50,26 +68,9 @@
                        VerticalOptions="End"
                        Grid.ColumnSpan="2" />
             </Grid>
-                 <Grid Padding="0" ColumnDefinitions="*,Auto">
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer 
-                        Tapped="MembersGroupClicked"
-                        NumberOfTapsRequired="1" />
-                </Grid.GestureRecognizers>
-                <Label Text="Ver integrantes Equipo"
-                       TextColor="White"
-                       FontSize="18"
-                       VerticalOptions="Center"
-                       Padding="0,0,0,15" />
-                <BoxView HeightRequest="1"
-                       BackgroundColor="Gray"
-                       HorizontalOptions="FillAndExpand"
-                       VerticalOptions="End"
-                       Grid.ColumnSpan="2" />
-            </Grid>
 
             <Grid Padding="0" ColumnDefinitions="*,Auto">
-                               <Grid.GestureRecognizers>
+                <Grid.GestureRecognizers>
                     <TapGestureRecognizer 
                         Tapped="UpdatePasswordClicked"
                         NumberOfTapsRequired="1" />

@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace Taskly_App.Converters
+namespace Taskly_App.Helpers.Converters
 {
     public class TruncateTextConverter : IValueConverter
     {

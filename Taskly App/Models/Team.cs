@@ -20,9 +20,6 @@ namespace Taskly_App.Models
         [Required]
         public required string Description { get; set; }
 
-        [Required]
-        public required string Icon { get; set; }
-
         public string? Code { get; set; }
 
         [Required]

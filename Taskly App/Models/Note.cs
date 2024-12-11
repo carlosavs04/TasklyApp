@@ -22,7 +22,7 @@ namespace Taskly_App.Models
 
         public bool IsCompleted { get; set; }
 
-        public DateTime CompletedAt { get; set; }
+        public DateTime? CompletedAt { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }
@@ -35,6 +35,7 @@ namespace Taskly_App.Models
 
         [Required]
         public int CreatedBy { get; set; }
+        public bool InitialIsCompleted { get; set; }
 
         [ForeignKey("ResponsibleId")]
         public User Responsible { get; set; } = null!;

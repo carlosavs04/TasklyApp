@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:Taskly_App.Converters"
+             xmlns:converters="clr-namespace:Taskly_App.Helpers.Converters"
              x:Class="Taskly_App.Views.Tabs.MyTasks.MyTasksPage"
              BackgroundColor="Black">
-
-    <!-- Registro de recursos -->
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:TruncateTextConverter x:Key="TruncateTextConverter" />
+            <converters:BoolToTextDecorationConverter x:Key="BoolToTextDecorationConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <!-- Contenedor principal -->
     <ScrollView>
         <VerticalStackLayout
             Padding="10,50,10,10"
             Spacing="25">
 
-            <!-- Títulos -->
             <Label
                 Text="Tareas"
                 TextColor="White"
@@ -30,9 +28,10 @@
                 FontSize="20"
                 HorizontalTextAlignment="Start" />
 
-            <!-- Lista de tareas -->
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" />
+
             <CollectionView 
-                ItemsSource="{Binding Tareas}" 
+                ItemsSource="{Binding Tasks}" 
                 BackgroundColor="Black" 
                 SelectionMode="Single"
                 SelectionChanged="OnDetailSelected">
@@ -41,11 +40,14 @@
                         <Frame BackgroundColor="Black" Padding="10" Margin="0" CornerRadius="10" BorderColor="Transparent">
                             <StackLayout>
                                 <HorizontalStackLayout Spacing="10" VerticalOptions="Center" Padding="0,0,0,20">
-                                    <CheckBox IsChecked="{Binding IsChecked}" VerticalOptions="Center" />
+                                    <CheckBox IsChecked="{Binding IsCompleted, Mode=TwoWay}" VerticalOptions="Center" CheckedChanged="OnTaskStatusChanged" />
                                     <VerticalStackLayout VerticalOptions="Center">
-                                        <Label Text="{Binding Titulo,
-                                            Converter={StaticResource TruncateTextConverter}}}" TextColor="White" FontSize="18" HorizontalTextAlignment="Start" />
-                                        <Label Text="{Binding Descripcion, Converter={StaticResource TruncateTextConverter}}" 
+                                        <Label Text="{Binding Title, Converter={StaticResource TruncateTextConverter}}" 
+                                               TextColor="White" 
+                                               FontSize="18" 
+                                               HorizontalTextAlignment="Start"
+                                               TextDecorations="{Binding IsCompleted, Converter={StaticResource BoolToTextDecorationConverter}}"/>
+                                        <Label Text="{Binding Body, Converter={StaticResource TruncateTextConverter}}" 
                                                TextColor="Gray" 
                                                FontSize="14" 
                                                HorizontalTextAlignment="Start" />
@@ -59,6 +61,10 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Label 
+                Text="{Binding ErrorMessage}" 
+                TextColor="Red" 
+                FontSize="16" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

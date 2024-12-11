@@ -65,7 +65,37 @@ namespace Taskly_App.Services
             return await _apiService.PostAsync<CodeRequest, object>("teams/join", request, true);
         }
 
-        public async Task<ApiResponse<object>?> UsersList()
+        public async Task<ApiResponse<Team>?> GetTeam(int id)
+        {
+            return await _apiService.GetAsync<Team>($"teams/{id}", true);
+        }
+
+        public async Task<ApiResponse<object>?> UpdateTeam(int id, TeamRequest request)
+        {
+            return await _apiService.PutAsync<TeamRequest, object>($"teams/{id}", request, true);
+        }
+
+        public async Task<ApiResponse<object>?> UpdatePassword(UpdatePasswordRequest request)
+        {
+            return await _apiService.PutAsync<UpdatePasswordRequest, object>("users/update-password", request, true);
+        }
+
+        public async Task<ApiResponse<List<Note>>?> GetUserTasks(int id)
+        {
+            return await _apiService.GetAsync<List<Note>>($"tasks/{id}/user", true);
+        }
+
+        public async Task<ApiResponse<object>?> MarkTaskAsCompleted(int id)
+        {
+            return await _apiService.PutAsyncWithoutBody<object>($"tasks/complete/{id}", true);
+        }
+
+        public async Task<ApiResponse<object>?> UnmarkTaskAsCompleted(int id)
+        {
+            return await _apiService.PutAsyncWithoutBody<object>($"tasks/pending/{id}", true);
+        }
+
+            public async Task<ApiResponse<object>?> UsersList()
         {
             return await _apiService.GetAsync<object>("users", true);
         }

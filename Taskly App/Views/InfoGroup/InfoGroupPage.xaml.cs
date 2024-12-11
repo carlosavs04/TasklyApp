@@ -1,61 +1,28 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Taskly_App.Helpers;
+using Taskly_App.ViewModels;
 
 namespace Taskly_App.Views.InfoGroup
 {
-    public partial class InfoGroupPage : ContentPage, INotifyPropertyChanged
+    public partial class InfoGroupPage : ContentPage
     {
-        private bool _isEditing;
+        private IServiceProvider _serviceProvider;
+        private TeamDetailsViewModel _viewModel;
 
-        public string TeamName { get; set; } = "Equipo Alpha";
-        public string TeamDescription { get; set; } = "Este es el mejor equipo.";
-        public string JoinCode { get; set; } = "ABC123";
-
-        public bool IsEditing
-        {
-            get => _isEditing;
-            set
-            {
-                _isEditing = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public InfoGroupPage()
+        public InfoGroupPage(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            IsEditing = false;
-            BindingContext = this;
+            _serviceProvider = serviceProvider;
+            var locator = serviceProvider.GetRequiredService<ViewModelLocator>();
+            _viewModel = locator.TeamDetailsViewModel;
+            BindingContext = _viewModel;
         }
 
-        // Editar
-        private void OnEditClicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            IsEditing = true;
-        }
-
-        // Guardar
-        private void OnSaveClicked(object sender, EventArgs e)
-        {
-            // Aquí podrías guardar los datos, por ejemplo, en un servidor o base de datos.
-            IsEditing = false;
-        }
-
-        // Cancelar
-        private void OnCancelClicked(object sender, EventArgs e)
-        {
-            // Restaurar los valores originales
-            TeamNameEntry.Text = TeamName;
-            DescriptionEntry.Text = TeamDescription;
-            JoinCodeEntry.Text = JoinCode;
-            IsEditing = false;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            base.OnAppearing();
+            _viewModel.LoadTeamCommand.Execute(null);
         }
     }
 }

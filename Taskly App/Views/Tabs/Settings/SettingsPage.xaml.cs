@@ -30,17 +30,17 @@ namespace Taskly_App.Views.Tabs.Settings
                 app.RestartApp();
             }
         }
-                private async void MembersGroupClicked(object sender, EventArgs e)
+        private async void MembersGroupClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MembersGroupPage());
         }
         private void InfoGroupClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new InfoGroupPage());
+            Navigation.PushAsync(new InfoGroupPage(_serviceProvider));
         }
         private void UpdatePasswordClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new UpdatePasswordPage());
+            Navigation.PushAsync(new UpdatePasswordPage(_serviceProvider));
         }
     }
 }

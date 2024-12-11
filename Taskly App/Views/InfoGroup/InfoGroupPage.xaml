@@ -6,43 +6,53 @@
              Padding="20">
 
     <VerticalStackLayout Spacing="15">
-        <!-- Título -->
-        <Label Text="Información del Grupo"
+        <Label Text="Información del grupo"
                FontSize="24"
                FontAttributes="Bold"
                TextColor="White"
                HorizontalTextAlignment="Center"
                Margin="0,20,0,20" />
 
-        <!-- Inputs -->
+        <ActivityIndicator 
+            IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}" />
+        
         <Entry x:Name="TeamNameEntry"
                Placeholder="Nombre del equipo"
-               Text="{Binding TeamName}"
+               Text="{Binding Name, Mode=TwoWay}"
                IsEnabled="{Binding IsEditing}"
                FontSize="16"
                BackgroundColor="Gray"
                TextColor="White"
-               PlaceholderColor="LightGray" />
+               PlaceholderColor="LightGray"
+               IsReadOnly="{Binding IsEditing, Converter={StaticResource InverseBooleanConverter}}"/>
 
         <Entry x:Name="DescriptionEntry"
                Placeholder="Descripción del equipo"
-               Text="{Binding TeamDescription}"
+               Text="{Binding Description, Mode=TwoWay}"
                IsEnabled="{Binding IsEditing}"
                FontSize="16"
                BackgroundColor="Gray"
                TextColor="White"
-               PlaceholderColor="LightGray" />
+               PlaceholderColor="LightGray" 
+               IsReadOnly="{Binding IsEditing, Converter={StaticResource InverseBooleanConverter}}"/>
 
         <Entry x:Name="JoinCodeEntry"
                Placeholder="Código para unirse"
-               Text="{Binding JoinCode}"
-               IsEnabled="{Binding IsEditing}"
+               Text="{Binding Code, Mode=TwoWay}"
+               IsReadOnly="True"
+               IsEnabled="False"
                FontSize="16"
                BackgroundColor="Gray"
                TextColor="White"
-               PlaceholderColor="LightGray" />
+               PlaceholderColor="LightGray"
+               IsVisible="{Binding IsGroupOwner}" />
 
-        <!-- Botones -->
+        <Label 
+            Text="{Binding ErrorMessage}" 
+            TextColor="Red" 
+            FontSize="16" />
+
         <Button x:Name="EditButton"
                 Text="Editar"
                 BackgroundColor="White"
@@ -51,8 +61,8 @@
                 HeightRequest="50"
                 CornerRadius="25"
                 HorizontalOptions="Fill"
-                Clicked="OnEditClicked"
-                IsVisible="{Binding IsEditing, Converter={StaticResource InverseBooleanConverter}}" />
+                Command="{Binding EditTeamCommand}"
+                IsVisible="{Binding ShowEditButton}" />
 
         <Button Text="Guardar"
                 BackgroundColor="White"
@@ -62,7 +72,8 @@
                 CornerRadius="25"
                 HorizontalOptions="Fill"
                 IsVisible="{Binding IsEditing}"
-                Clicked="OnSaveClicked" />
+                Command="{Binding UpdateTeamCommand}"
+                IsEnabled="{Binding UpdateTeamCommand.CanExecute}" />
 
         <Button Text="Cancelar"
                 BackgroundColor="Gray"
@@ -71,7 +82,7 @@
                 HeightRequest="50"
                 CornerRadius="25"
                 HorizontalOptions="Fill"
-                IsVisible="{Binding IsEditing}"
-                Clicked="OnCancelClicked" />
+                Command="{Binding CancelEditCommand}"
+                IsVisible="{Binding IsEditing}" />
     </VerticalStackLayout>
 </ContentPage>
