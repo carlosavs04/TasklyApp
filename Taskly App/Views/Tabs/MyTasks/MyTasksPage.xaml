@@ -53,9 +53,10 @@
                                                HorizontalTextAlignment="Start" />
                                     </VerticalStackLayout>
                                 </HorizontalStackLayout>
-                                <BoxView Color="Gray"
-                                         HeightRequest="2"
-                                         HorizontalOptions="Fill"/>
+                              <BoxView Color="Gray"
+         HeightRequest="2"
+         HorizontalOptions="FillAndExpand"/>
+
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

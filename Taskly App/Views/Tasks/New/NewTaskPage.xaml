@@ -42,20 +42,6 @@
                     HorizontalOptions="FillAndExpand" />
             </VerticalStackLayout>
 
-            <!-- Input: Fecha esperada -->
-            <VerticalStackLayout Spacing="5">
-                <Label
-                    Text="Fecha de entrega"
-                    TextColor="White"
-                    FontSize="20"
-                    HorizontalTextAlignment="Start" />
-                <DatePicker
-                    BackgroundColor="Gray"
-                    TextColor="White"
-                    FontSize="20"
-                    HeightRequest="50" />
-            </VerticalStackLayout>
-
             <!-- Sección: Asignar Tarea -->
             <VerticalStackLayout Spacing="10">
                 <Label

@@ -20,20 +20,22 @@
 
             <!-- Input: Nombre de la Tarea -->
             <VerticalStackLayout Spacing="5">
+                <Label Text="Nombre de la tarea" TextColor="White" FontSize="20" />
                 <Entry
-                    Placeholder="Nombre de la tarea"
+                    Text="{Binding NombreTarea}"
                     PlaceholderColor="White"
                     BackgroundColor="Gray"
                     TextColor="White"
                     FontSize="20"
                     HeightRequest="50"
-                    IsEnabled="False" />
+                    IsReadOnly="True" />
             </VerticalStackLayout>
 
             <!-- Input: Descripción de la Tarea -->
             <VerticalStackLayout Spacing="5">
+                <Label Text="Descripción" TextColor="White" FontSize="20" />
                 <Editor
-                    Placeholder="Descripción"
+                    Text="{Binding DescripcionTarea}"
                     PlaceholderColor="White"
                     BackgroundColor="Gray"
                     TextColor="White"
@@ -44,67 +46,67 @@
                     IsReadOnly="True" />
             </VerticalStackLayout>
 
-            <!-- Input: Fecha esperada -->
+            <!-- Input: Responsable -->
             <VerticalStackLayout Spacing="5">
-                <Label
-                    Text="Fecha de entrega"
-                    TextColor="White"
-                    FontSize="20"
-                    HorizontalTextAlignment="Start" />
-                <DatePicker
+                <Label Text="Responsable" TextColor="White" FontSize="20" />
+                <Entry
+                    Text="{Binding Responsable}"
+                    PlaceholderColor="White"
                     BackgroundColor="Gray"
                     TextColor="White"
                     FontSize="20"
                     HeightRequest="50"
-                    IsEnabled="False" />
+                    IsReadOnly="True" />
             </VerticalStackLayout>
 
-            <!-- Sección: Asignar Tarea -->
-            <VerticalStackLayout Spacing="10">
-                <Label
-                    Text="Asignar Tarea"
+            <!-- Input: Fecha de Creación -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Fecha de creación" TextColor="White" FontSize="20" />
+                <Entry
+                    Text="{Binding FechaCreacion}"
+                    PlaceholderColor="White"
+                    BackgroundColor="Gray"
                     TextColor="White"
-                    FontSize="25"
-                    HorizontalTextAlignment="Center" />
-
-                <!-- Lista personalizada para asignar tarea -->
-                <CollectionView
-                    ItemsSource="{Binding Encargados}"
-                    SelectionMode="Single"
-                    SelectedItem="{Binding EncargadoSeleccionado, Mode=TwoWay}"
-                    HeightRequest="180"
-                    IsEnabled="False">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame
-                                Padding="10"
-                                CornerRadius="10"
-                                HasShadow="False"
-                                BackgroundColor="Black"
-                                BorderColor="Transparent">
-                                <Frame.Triggers>
-                                    <!-- Cambiar el borde cuando el elemento esté seleccionado -->
-                                    <DataTrigger TargetType="Frame" Binding="{Binding ., Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=SelectedItem}" Value="{Binding}">
-                                        <Setter Property="BorderColor" Value="White" />
-                                    </DataTrigger>
-                                </Frame.Triggers>
-                                <HorizontalStackLayout Spacing="10">
-                                    <Image
-                                        Source="{Binding Icono}"
-                                        WidthRequest="40"
-                                        HeightRequest="40"
-                                        Aspect="AspectFit" />
-                                    <Label
-                                        Text="{Binding Nombre}"
-                                        TextColor="White"
-                                        FontSize="20"
-                                        VerticalOptions="Center" />
-                                </HorizontalStackLayout>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                    FontSize="20"
+                    HeightRequest="50"
+                    IsReadOnly="True" />
             </VerticalStackLayout>
+
+            <!-- Input: Fecha de Finalización -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Fecha de finalización" TextColor="White" FontSize="20" />
+                <Entry
+                    Text="{Binding FechaFinalizacion}"
+                    PlaceholderColor="White"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    FontSize="20"
+                    HeightRequest="50"
+                    IsReadOnly="True" />
+            </VerticalStackLayout>
+
+            <!-- Input: Creada por -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Creada por" TextColor="White" FontSize="20" />
+                <Entry
+                    Text="{Binding CreadaPor}"
+                    PlaceholderColor="White"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    FontSize="20"
+                    HeightRequest="50"
+                    IsReadOnly="True" />
+            </VerticalStackLayout>
+
+            <!-- Botón para eliminar la tarea -->
+            <Button
+                Text="Eliminar Tarea"
+                TextColor="White"
+                BackgroundColor="Red"
+                FontSize="20"
+                CornerRadius="10"
+                HeightRequest="50"
+                Command="{Binding EliminarTareaCommand}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

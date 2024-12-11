@@ -16,27 +16,49 @@
                    Margin="0,0,0,20"/>
 
             <!-- Lista de integrantes -->
-            <CollectionView ItemsSource="{Binding Users}" BackgroundColor="Black">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <VerticalStackLayout Padding="10" Margin="0,0,0,5">
-                            <Label Text="{Binding Username}"
-                                   FontSize="18"
-                                   FontAttributes="Bold"
-                                   TextColor="White"/>
-                            <Label Text="{Binding Email}"
-                                   FontSize="14"
-                                   TextColor="LightGray"/>
-                            <!-- Borde inferior -->
-                            <BoxView Color="Gray"
-                                     HeightRequest="1"
-                                     HorizontalOptions="Fill"
-                                     VerticalOptions="End"
-                                     Margin="0,5,0,0" />
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+         <CollectionView ItemsSource="{Binding Users}" BackgroundColor="Black">
+    <CollectionView.ItemTemplate>
+        <DataTemplate>
+            <VerticalStackLayout Padding="10" Margin="0,0,0,5">
+                <Grid ColumnDefinitions="*, Auto">
+                    <!-- Información del usuario -->
+                    <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                        <Label Text="{Binding Username}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="White"/>
+                        <Label Text="{Binding Email}"
+                               FontSize="14"
+                               TextColor="LightGray"/>
+                    </VerticalStackLayout>
+                    
+                    <!-- Botón para eliminar -->
+                    <Button Text="X"
+                            FontSize="14"
+                            TextColor="White"
+                            BackgroundColor="Gray"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            CornerRadius="20"
+                            VerticalOptions="Center"
+                            HorizontalOptions="End"
+                            Grid.Column="1"
+                            Command="{Binding BindingContext.DeleteUserCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                            CommandParameter="{Binding}" />
+                </Grid>
+
+                <!-- Borde inferior -->
+                <BoxView Color="Gray"
+                         HeightRequest="1"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="End"
+                         Margin="0,5,0,0" />
+            </VerticalStackLayout>
+        </DataTemplate>
+    </CollectionView.ItemTemplate>
+</CollectionView>
+
+
 
         </VerticalStackLayout>
     </ScrollView>
