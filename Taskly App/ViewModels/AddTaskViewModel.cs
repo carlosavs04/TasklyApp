@@ -24,7 +24,7 @@ namespace Taskly_App.ViewModels
         private int _responsibleId = 0;
         private int _teamId = 0;
         private bool _isBusy = false;
-        private User _selectedUser;
+        private User? _selectedUser;
         private Dictionary<string, List<string>>? _errors;
         private ObservableCollection<User> _users = new ObservableCollection<User>();
 
@@ -64,14 +64,14 @@ namespace Taskly_App.ViewModels
             }
         }
 
-        public User SelectedUser
+        public User? SelectedUser
         {
             get => _selectedUser;
             set
             {
                 if (SetProperty(ref _selectedUser, value))
                 {
-                    _responsibleId = value.Id;
+                    _responsibleId = value?.Id ?? 0;
                     ((Command)AddTaskCommand).ChangeCanExecute();
                 }
             }
@@ -156,7 +156,7 @@ namespace Taskly_App.ViewModels
 
                 if (response != null && response.Status == "success")
                 {
-                    await _navigationService.NavigateToAsync<AllTasksPage>();
+                    await _navigationService.NavigateToAsync<AppShell>();
                 }
                 else
                 {

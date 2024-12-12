@@ -41,21 +41,13 @@ namespace Taskly_App.Views.Tabs.MyTasks
             }
         }
 
-
-        private async void OnDetailSelected(object sender, SelectionChangedEventArgs e)
-{
-    // Obtener la tarea seleccionada
-    var tareaSeleccionada = e.CurrentSelection.FirstOrDefault();
-
-    if (tareaSeleccionada != null)
-    {
-        // Navegar a la nueva página pasando la tarea seleccionada
-        await Navigation.PushAsync(new DetailTaskPage
+        private async void OnDetailSelected(object sender, TappedEventArgs e)
         {
-            BindingContext = tareaSeleccionada
-        });
-}
-}
-
+            if (e.Parameter is Note selected)
+            {
+                var taskId = selected.Id;
+                await Navigation.PushAsync(new DetailTaskPage(_serviceProvider, taskId));
+            }
+        }
     }
 }

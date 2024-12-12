@@ -29,5 +29,6 @@ namespace Taskly_App.Helpers
         public TeamMembersViewModel TeamMembersViewModel => _serviceProvider.GetRequiredService<TeamMembersViewModel>();
         public TasksViewModel TasksViewModel => _serviceProvider.GetRequiredService<TasksViewModel>();
         public AddTaskViewModel AddTaskViewModel => _serviceProvider.GetRequiredService<AddTaskViewModel>();
+        public TaskDetailsViewModel TaskDetailsViewModel => _serviceProvider.GetRequiredService<TaskDetailsViewModel>();
     }
 }
