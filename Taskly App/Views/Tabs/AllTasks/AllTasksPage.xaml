@@ -54,15 +54,6 @@
                                                     Tapped="OnDetailSelected" CommandParameter="{Binding}" NumberOfTapsRequired="1"/>
                                             </VerticalStackLayout.GestureRecognizers>
                                         </VerticalStackLayout>
-
-                                        <Button
-                                            Text="✏️"
-                                            FontSize="16"
-                                            TextColor="White"
-                                            BackgroundColor="Transparent"
-                                            HorizontalOptions="End"
-                                            VerticalOptions="Center"
-                                             />
                                     </HorizontalStackLayout>
                                     <BoxView Color="Gray"
                                              HeightRequest="2"
