@@ -17,6 +17,7 @@ namespace Taskly_App.ViewModels
         private readonly ConfigurationService _configurationService;
         private string _errorMessage = string.Empty;
         private bool _isBusy = false;
+        private bool _isGroupOwner = false;
         private int _teamId;
         private ObservableCollection<Note> _tasks = new ObservableCollection<Note>();
 
@@ -26,6 +27,7 @@ namespace Taskly_App.ViewModels
             _configurationService = configurationService;
             _teamId = configurationService.GetSelectedTeamId();
             LoadTasksCommand = new Command(async () => await LoadTasksAsync());
+            IsOwner();
         }
 
         public ObservableCollection<Note> Tasks
@@ -44,6 +46,12 @@ namespace Taskly_App.ViewModels
         {
             get => _isBusy;
             set => SetProperty(ref _isBusy, value);
+        }
+
+        public bool IsGroupOwner
+        {
+            get => _isGroupOwner;
+            set => SetProperty(ref _isGroupOwner, value);
         }
 
         public ICommand LoadTasksCommand { get; }
@@ -90,6 +98,11 @@ namespace Taskly_App.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private void IsOwner()
+        {
+            IsGroupOwner = _configurationService.GetUserId() == _configurationService.GetOwnerTeamId();
         }
     }
 }

@@ -100,7 +100,8 @@
                 FontSize="20"
                 CornerRadius="10"
                 HeightRequest="50"
-                Command="{Binding DeleteTaskCommand}" />
+                Command="{Binding DeleteTaskCommand}" 
+                IsVisible="{Binding IsGroupOwner}"/>
 
             <ActivityIndicator 
                 IsVisible="{Binding IsBusy}"

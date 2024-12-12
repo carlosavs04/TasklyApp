@@ -16,18 +16,22 @@ namespace Taskly_App.ViewModels
     {
         private readonly ApiRouterService _apiRouterService;
         private readonly NavigationService _navigationService;
+        private readonly ConfigurationService _configurationService;
         private Note? _note;
         private string _errorMessage = string.Empty;    
         private bool _isBusy = false;
+        private bool _isGroupOwner = false;
         private bool _fromMyTasks = false;
         private int _taskId;
 
-        public TaskDetailsViewModel(ApiRouterService apiRouterService, NavigationService navigationService)
+        public TaskDetailsViewModel(ApiRouterService apiRouterService, NavigationService navigationService, ConfigurationService configurationService)
         {
             _apiRouterService = apiRouterService;
             _navigationService = navigationService;
+            _configurationService = configurationService;
             LoadTaskCommand = new Command(async () => await LoadTaskAsync());
             DeleteTaskCommand = new Command(async () => await DeleteTaskAsync());
+            IsOwner();
         }
 
         public Note? Note
@@ -46,6 +50,12 @@ namespace Taskly_App.ViewModels
         {
             get => _isBusy;
             set => SetProperty(ref _isBusy, value);
+        }
+
+        public bool IsGroupOwner
+        {
+            get => _isGroupOwner;
+            set => SetProperty(ref _isGroupOwner, value);
         }
 
         public void Initialize(int taskId, bool fromMyTasks = false)
@@ -151,5 +161,9 @@ namespace Taskly_App.ViewModels
             }
         }
 
+        private void IsOwner()
+        {
+            IsGroupOwner = _configurationService.GetUserId() == _configurationService.GetOwnerTeamId();
+        }
     }
 }

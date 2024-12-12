@@ -72,6 +72,11 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+
+                <Label 
+                    Text="{Binding ErrorMessage}" 
+                    TextColor="Red" 
+                    FontSize="16" />
             </VerticalStackLayout>
         </ScrollView>
 
@@ -84,6 +89,7 @@
             WidthRequest="180"
             AbsoluteLayout.LayoutFlags="PositionProportional"
             AbsoluteLayout.LayoutBounds="0.9, 0.95, AutoSize, AutoSize"
-            Clicked="OnAddTaskClicked" />
+            Clicked="OnAddTaskClicked" 
+            IsVisible="{Binding IsGroupOwner}"/>
     </AbsoluteLayout>
 </ContentPage>
