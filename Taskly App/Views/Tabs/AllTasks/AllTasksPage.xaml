@@ -28,8 +28,7 @@
 
                 <CollectionView ItemsSource="{Binding Tasks}" 
                     BackgroundColor="Black"
-                    SelectionMode="Single" 
-                    SelectionChanged="OnDetailSelected">
+                    SelectionMode="Single">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame BackgroundColor="Black" Padding="10" Margin="0" CornerRadius="10" BorderColor="Transparent">
@@ -50,6 +49,10 @@
                                                    TextColor="Gray" 
                                                    FontSize="14" 
                                                    HorizontalTextAlignment="Start" />
+                                            <VerticalStackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Tapped="OnDetailSelected" CommandParameter="{Binding}" NumberOfTapsRequired="1"/>
+                                            </VerticalStackLayout.GestureRecognizers>
                                         </VerticalStackLayout>
 
                                         <Button
@@ -59,7 +62,7 @@
                                             BackgroundColor="Transparent"
                                             HorizontalOptions="End"
                                             VerticalOptions="Center"
-                                            Clicked="OnEditTaskClicked" />
+                                             />
                                     </HorizontalStackLayout>
                                     <BoxView Color="Gray"
                                              HeightRequest="2"

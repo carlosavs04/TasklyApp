@@ -3,26 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Taskly_App.Views.Tasks.Detail.DetailTaskPage"
              BackgroundColor="Black">
-    <!-- Contenedor desplazable -->
     <ScrollView>
-        <!-- Contenedor principal -->
         <VerticalStackLayout
             Padding="10,20,10,10"
             BackgroundColor="Black"
             Spacing="20">
 
-            <!-- Título -->
             <Label
-                Text="Detalle de la Tarea"
+                Text="Detalle de la tarea"
                 TextColor="White"
                 FontSize="25"
                 HorizontalTextAlignment="Center" />
 
-            <!-- Input: Nombre de la Tarea -->
+            <ActivityIndicator 
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}" />
+
             <VerticalStackLayout Spacing="5">
-                <Label Text="Nombre de la tarea" TextColor="White" FontSize="20" />
+                <Label Text="Título de la tarea" TextColor="White" FontSize="20" />
                 <Entry
-                    Text="{Binding NombreTarea}"
+                    Text="{Binding Note.Title}"
                     PlaceholderColor="White"
                     BackgroundColor="Gray"
                     TextColor="White"
@@ -31,11 +31,10 @@
                     IsReadOnly="True" />
             </VerticalStackLayout>
 
-            <!-- Input: Descripción de la Tarea -->
             <VerticalStackLayout Spacing="5">
                 <Label Text="Descripción" TextColor="White" FontSize="20" />
                 <Editor
-                    Text="{Binding DescripcionTarea}"
+                    Text="{Binding Note.Body}"
                     PlaceholderColor="White"
                     BackgroundColor="Gray"
                     TextColor="White"
@@ -46,11 +45,10 @@
                     IsReadOnly="True" />
             </VerticalStackLayout>
 
-            <!-- Input: Responsable -->
             <VerticalStackLayout Spacing="5">
                 <Label Text="Responsable" TextColor="White" FontSize="20" />
                 <Entry
-                    Text="{Binding Responsable}"
+                    Text="{Binding Note.ResponsibleUsername}"
                     PlaceholderColor="White"
                     BackgroundColor="Gray"
                     TextColor="White"
@@ -59,11 +57,10 @@
                     IsReadOnly="True" />
             </VerticalStackLayout>
 
-            <!-- Input: Fecha de Creación -->
             <VerticalStackLayout Spacing="5">
                 <Label Text="Fecha de creación" TextColor="White" FontSize="20" />
                 <Entry
-                    Text="{Binding FechaCreacion}"
+                    Text="{Binding Note.CreatedAt}"
                     PlaceholderColor="White"
                     BackgroundColor="Gray"
                     TextColor="White"
@@ -72,11 +69,10 @@
                     IsReadOnly="True" />
             </VerticalStackLayout>
 
-            <!-- Input: Fecha de Finalización -->
             <VerticalStackLayout Spacing="5">
                 <Label Text="Fecha de finalización" TextColor="White" FontSize="20" />
                 <Entry
-                    Text="{Binding FechaFinalizacion}"
+                    Text="{Binding Note.CompletedAt}"
                     PlaceholderColor="White"
                     BackgroundColor="Gray"
                     TextColor="White"
@@ -85,11 +81,10 @@
                     IsReadOnly="True" />
             </VerticalStackLayout>
 
-            <!-- Input: Creada por -->
             <VerticalStackLayout Spacing="5">
                 <Label Text="Creada por" TextColor="White" FontSize="20" />
                 <Entry
-                    Text="{Binding CreadaPor}"
+                    Text="{Binding Note.CreatorUsername}"
                     PlaceholderColor="White"
                     BackgroundColor="Gray"
                     TextColor="White"
@@ -98,15 +93,18 @@
                     IsReadOnly="True" />
             </VerticalStackLayout>
 
-            <!-- Botón para eliminar la tarea -->
             <Button
-                Text="Eliminar Tarea"
+                Text="Eliminar tarea"
                 TextColor="White"
                 BackgroundColor="Red"
                 FontSize="20"
                 CornerRadius="10"
                 HeightRequest="50"
-                Command="{Binding EliminarTareaCommand}" />
+                Command="{Binding DeleteTaskCommand}" />
+
+            <ActivityIndicator 
+                IsVisible="{Binding IsBusy}"
+                IsRunning="{Binding IsBusy}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

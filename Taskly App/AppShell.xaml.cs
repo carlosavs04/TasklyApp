@@ -27,7 +27,7 @@ namespace Taskly_App
             allTasksTab.Items.Add(new ShellContent { Content = allTasksPage });
             settingsTab.Items.Add(new ShellContent { Content = settingsPage });
 
-            CurrentItem = myTasksTab;
+            CurrentItem = allTasksTab;
         }
     }
 }

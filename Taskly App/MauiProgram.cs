@@ -60,6 +60,7 @@ namespace Taskly_App
             builder.Services.AddTransient<TeamMembersViewModel>();
             builder.Services.AddTransient<TasksViewModel>();
             builder.Services.AddTransient<AddTaskViewModel>();
+            builder.Services.AddTransient<TaskDetailsViewModel>();
 
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<LoginPage>();
@@ -67,6 +68,7 @@ namespace Taskly_App
             builder.Services.AddTransient<AllTasksPage>();
             builder.Services.AddTransient<MyTasksPage>();
             builder.Services.AddTransient<SettingsPage>();
+            builder.Services.AddTransient<AppShell>();
 
 #if DEBUG
             builder.Logging.AddDebug();

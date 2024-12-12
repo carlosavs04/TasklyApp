@@ -4,6 +4,7 @@ using Taskly_App.Views.Tasks.Edit;
 using Taskly_App.Views.Tasks.Detail;
 using Taskly_App.ViewModels;
 using Taskly_App.Helpers;
+using Taskly_App.Models;
 
 namespace Taskly_App.Views.Tabs.AllTasks
 {
@@ -32,18 +33,13 @@ namespace Taskly_App.Views.Tabs.AllTasks
             await Navigation.PushAsync(new NewTaskPage(_serviceProvider));
         }
 
-private async void OnEditTaskClicked(object sender, EventArgs e)
-{
-        // Navegar a la página de edición con la tarea seleccionada
-        await Navigation.PushAsync(new EditTaskPage());
-    
-}
-        private async void OnDetailSelected(object sender, SelectionChangedEventArgs e)
-{
-        // Navegar a la nueva página pasando la tarea seleccionada
-        await Navigation.PushAsync(new DetailTaskPage());
-}
-
-
+        private async void OnDetailSelected(object sender, TappedEventArgs e)
+        {
+            if (e.Parameter is Note selected)
+            {
+                var taskId = selected.Id;
+                await Navigation.PushAsync(new DetailTaskPage(_serviceProvider, taskId));
+            }
+        }
     }
 }
